@@ -52,8 +52,8 @@ class AuthController extends Controller
      */
     public function login(Request $request)
     {
-        die("asdfasf");
-          //validate incoming request 
+          
+        //validate incoming request 
         $this->validate($request, [
             'email' => 'required|string',
             'password' => 'required|string',

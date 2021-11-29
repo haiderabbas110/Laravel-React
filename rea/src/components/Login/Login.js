@@ -1,61 +1,65 @@
 import { path_server, request_delay } from "../../Constants";
 import React,{Component,useState, useEffect} from "react"
 import ReactDOM from "react-dom"
+import Form from "react-bootstrap/Form";
+import Button from "react-bootstrap/Button";
+
+
+
 //import './Login.css';
-import { withRouter } from "react-router";
+//import { withRouter } from "react-router";
 
 
 function Login(){
+    const axios = require('axios');
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
 
-      const axios = require('axios');
+    function validateForm() {
+      return email.length > 0 && password.length > 0;
+    }
 
-      // this.state = {
-      //   value: 'Please write an essay about your favorite DOM element.'
-      // };
-  
-      // this.handleChange = this.handleChange.bind(this);
-      // this.handleSubmit = this.handleSubmit.bind(this);
+    function handleSubmit(event) {
+      event.preventDefault();
 
-      // handleSubmit(event) {
-      //   alert('An essay was submitted: ' + this.state.value);
-      //   event.preventDefault();
-      // }
-      
-          const handleSubmit= (e) => {
-            e.preventDefault();
-            // axios({
-            //   method: "post",
-            //   url: path_server+"/api/login",
-            //   data: {"email":"haider.abbas@yopmail.com", "password":"haider555"},
-            //   headers: { "Content-Type": "multipart/form-data" },
-            // })
-            // .then(function (response) {
-            //   //handle success
-            //   console.log(response);
-            // })
-            // .catch(function (response) {
-            //   //handle error
-            //   console.log(response);
-            // });
-
-            axios.post(path_server+"/api/login")
-              .then(res => {
-                console.log(res);
-                console.log(res.data);
-              });
-              
-          }
-
-    
-          return (
-            <form onSubmit={handleSubmit}>
-              <label>Email:</label>
-              <input type="email" name="email" />
-              <label>Password:</label>
-              <input type="password" name="password" />
-              <input type="submit" value="Submit" />
-            </form>
-          );
+      axios.post(path_server+"/api/login")
+      .then(res => {
+        if(res){
+          console.log(res)
+          axios.post(path_server+"/api/allUsers")
+          .then(res => {
+            
+          });
         }
 
-        export default Login;
+      });
+    }
+
+    return (
+      <div className="Login">
+        <Form onSubmit={handleSubmit}>
+          <Form.Group size="lg" controlId="email">
+            <Form.Label>Email</Form.Label>
+            <Form.Control
+              autoFocus
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+          </Form.Group>
+          <Form.Group size="lg" controlId="password">
+            <Form.Label>Password</Form.Label>
+            <Form.Control
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+          </Form.Group>
+          <Button block size="lg" type="submit" disabled={!validateForm()}>
+            Login
+          </Button>
+        </Form>
+      </div>
+    );
+    }
+export default Login;

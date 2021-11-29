@@ -13,10 +13,6 @@
 |
 */
 
-$router->get('/', function () use ($router) {
-    return $router->app->version();
-});
-
 // API route group
 $router->group(['prefix' => 'api'], function () use ($router) {
     $router->post('register', 'AuthController@register');
@@ -28,3 +24,9 @@ $router->group(['prefix' => 'api'], function () use ($router) {
     $router->get('users', 'UserController@allUsers');
  
  });
+
+ $router->options('/{any:.*}', [function (){ 
+    return response(['status' => 'success']); 
+   }
+  ]
+ );
