@@ -25,8 +25,8 @@ $router->group(['prefix' => 'api'], function () use ($router) {
  
  });
 
- $router->options('/{any:.*}', [function (){ 
-    return response(['status' => 'success']); 
-   }
-  ]
- );
+//  $router->options('/{any:.*}', [function (){ 
+//     return response(['status' => 'success']); 
+//    }
+//   ]
+//  );

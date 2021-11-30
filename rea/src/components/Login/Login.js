@@ -21,15 +21,16 @@ function Login(){
 
     function handleSubmit(event) {
       event.preventDefault();
+      const userData = {
+        email: email,
+        password:password
+      }
 
-      axios.post(path_server+"/api/login")
+      axios.post(path_server+"/api/login", userData)
       .then(res => {
         if(res){
-          console.log(res)
-          axios.post(path_server+"/api/allUsers")
-          .then(res => {
-            
-          });
+          localStorage.setItem("userToken", res.data.token);
+
         }
 
       });

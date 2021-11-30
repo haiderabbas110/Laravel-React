@@ -4,12 +4,14 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import './index.css';
 import App from './App';
 import Login from './components/Login/Login';
+import User from './components/User/User';
 import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
   <BrowserRouter>
     <App />
     <Login />
+    <User />
   </BrowserRouter>,
   document.getElementById("root")
 );
