@@ -6,9 +6,11 @@ import App from './App';
 import Login from './components/Login/Login';
 import User from './components/User/User';
 import reportWebVitals from './reportWebVitals';
+import history from './history'
+
 
 ReactDOM.render(
-  <BrowserRouter>
+  <BrowserRouter history={history}>
     <App />
     <Login />
     <User />

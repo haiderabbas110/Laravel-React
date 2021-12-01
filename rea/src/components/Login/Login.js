@@ -3,7 +3,7 @@ import React,{Component,useState, useEffect} from "react"
 import ReactDOM from "react-dom"
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
-
+import history from '../../history'
 
 
 //import './Login.css';
@@ -30,6 +30,7 @@ function Login(){
       .then(res => {
         if(res){
           localStorage.setItem("userToken", res.data.token);
+          history.push('/user');
 
         }
 
