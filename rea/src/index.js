@@ -3,8 +3,7 @@ import ReactDOM from 'react-dom';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import './index.css';
 import App from './App';
-import Login from './components/Login/Login';
-import User from './components/User/User';
+
 import reportWebVitals from './reportWebVitals';
 import history from './history'
 
@@ -12,9 +11,8 @@ import history from './history'
 ReactDOM.render(
   <BrowserRouter history={history}>
     <App />
-    <Login />
-    <User />
   </BrowserRouter>,
+
   document.getElementById("root")
 );
 
