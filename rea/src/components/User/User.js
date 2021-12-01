@@ -10,6 +10,7 @@ function User(){
     const token =   localStorage.getItem("userToken");
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
+    console.log(token);
       if(!token){
         history.push('/login');
       }
@@ -17,27 +18,21 @@ function User(){
       const config = {
         headers: { Authorization: `Bearer ${token}` }
       };
+
+      useEffect(() => {
       
-      axios.get(path_server+"/api/users", config)
-      .then(res => {
-        if(res){
-          //setItems(res.data.users);
+        axios.get(path_server+"/api/users", config)
+        .then(res => {
+          if(res){
+            res.data.users.map((anObjectMapped, index) => {
+                  setName(anObjectMapped.name);
+                  setEmail(anObjectMapped.email);
+            })
+            
+          }
+        });
 
-          res.data.users.map((anObjectMapped, index) => {
-            //return (
-                // <p key={`${anObjectMapped.name}_{anObjectMapped.email}`}>
-                //     {anObjectMapped.name} - {anObjectMapped.email}
-                // </p>
-
-                setName(anObjectMapped.name);
-                setEmail(anObjectMapped.email);
-           // );
-        })
-          
-
-        }
-
-      });
+      },[]);
 
     return (
       <div className="Users">

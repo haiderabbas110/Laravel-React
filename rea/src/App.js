@@ -1,15 +1,26 @@
-import React,{Component} from "react"
+import React,{Component, useState} from "react"
+import { Route, Routes } from "react-router";
 import './App.css';
-
-class App extends Component {
-  render() {
+import Login from './components/Login/Login';
+import User from './components/User/User';
+function App() {
+    const [token, setToken] = useState();
+  
+    if(!token) {
+      return <Login setToken={setToken} />
+    }
     return (
-      <div className="App">
-        <h1>Welcome to React Router!</h1>
-      </div>
+    <>
+         <div className="App">
+          <h1>Welcome to React Router!</h1>
+        </div>
+        <Routes>
+            <Route path="/login" element={<Login />} />
+            <Route path="/user" element={<User />} />
+        </Routes>
+    </>
+
      
     );
   }
-}
-
 export default App;
