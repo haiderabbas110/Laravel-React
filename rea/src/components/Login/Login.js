@@ -4,13 +4,14 @@ import ReactDOM from "react-dom"
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import history from '../../history'
+import PropTypes from 'prop-types';
 
 
 //import './Login.css';
 //import { withRouter } from "react-router";
 
 
-function Login(){
+function Login({setToken}){
     const axios = require('axios');
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -29,7 +30,9 @@ function Login(){
       axios.post(path_server+"/api/login", userData)
       .then(res => {
         if(res){
-          localStorage.setItem("userToken", res.data.token);
+          //localStorage.setItem("userToken", res.data.token);
+          setToken(res.data.token);
+
           history.push('/user');
 
         }
@@ -65,3 +68,6 @@ function Login(){
     );
     }
 export default Login;
+Login.propTypes = {
+  setToken: PropTypes.func.isRequired
+};

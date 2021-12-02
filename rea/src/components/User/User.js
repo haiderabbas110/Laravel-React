@@ -4,16 +4,12 @@ import ReactDOM from "react-dom"
 import Form from "react-bootstrap/Form";
 import history from '../../history'
 import Button from "react-bootstrap/Button";
-
+import useToken from '../../useToken';
 function User(){
     const axios = require('axios');
-    const token =   localStorage.getItem("userToken");
+    const { token, setToken } = useToken();
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
-    console.log(token);
-      if(!token){
-        history.push('/login');
-      }
       
       const config = {
         headers: { Authorization: `Bearer ${token}` }
