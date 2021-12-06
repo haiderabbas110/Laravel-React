@@ -4,6 +4,9 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import PropTypes from 'prop-types';
 import { useNavigate } from 'react-router';
+import Image from "react-bootstrap/Image";
+import './login.scss';
+
 
 function Login({setToken}){
   let navigate = useNavigate();
@@ -11,7 +14,6 @@ function Login({setToken}){
     const axios = require('axios');
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    
 
     function validateForm() {
       //return email.length > 0 && password.length > 0;
@@ -45,32 +47,39 @@ function Login({setToken}){
     }
 
     return (
-      <div className="Login">
-        <Form onSubmit={handleSubmit}>
-          <Form.Group size="lg" controlId="email">
-            <Form.Label>Email</Form.Label>
-            <Form.Control
-              autoFocus
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-            />
-          </Form.Group>
-          <Form.Group size="lg" controlId="password">
-            <Form.Label>Password</Form.Label>
-            <Form.Control
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
-          </Form.Group>
-          <Button block size="lg" type="submit" disabled={!validateForm()}>
-            Login
-          </Button>
-        </Form>
-      </div>
+      <section class="headerBackground">
+        <div class="loginLeft">
+
+        <Image src="http://intranet.genetech.pk/intranet/assets/images/white_logo.png" fluid />
+
+        </div>
+        <div class="loginRight">
+          <Form onSubmit={handleSubmit}>
+            <Form.Group size="lg" controlId="email">
+              <Form.Label>Email</Form.Label>
+              <Form.Control
+                autoFocus
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
+            </Form.Group>
+            <Form.Group size="lg" controlId="password">
+              <Form.Label>Password</Form.Label>
+              <Form.Control
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
+              <Button block size="lg" type="submit" disabled={!validateForm()}></Button>
+            </Form.Group>
+            
+          </Form>
+        </div>
+      </section>
     );
-    }
+}
+
 export default Login;
 Login.propTypes = {
   setToken: PropTypes.func.isRequired

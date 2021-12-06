@@ -11,7 +11,7 @@ import Header from './components/Sementics/Header/Header';
 
 ReactDOM.render(
   <BrowserRouter history={history}>
-    {/* <Header /> */}
+    <Header />
     <App />
   </BrowserRouter>,
 
