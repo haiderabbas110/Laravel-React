@@ -5,17 +5,17 @@ import Button from "react-bootstrap/Button";
 import PropTypes from 'prop-types';
 import { useNavigate } from 'react-router';
 
-
-
 function Login({setToken}){
   let navigate = useNavigate();
 
     const axios = require('axios');
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    
 
     function validateForm() {
-      return email.length > 0 && password.length > 0;
+      //return email.length > 0 && password.length > 0;
+      return true;
     }
 
     function handleSubmit(event) {
@@ -27,12 +27,21 @@ function Login({setToken}){
 
       axios.post(path_server+"/api/login", userData)
       .then(res => {
+        console.log(res.length);
+        if (res.length === 0) {
+          return Promise.reject(new Error("Empty list!"));
+        }
         if(res){
           setToken(res.data.token);
           navigate('/user')
         }
 
+      }).catch(error => { 
+        
+        console.log(error); 
+        return Promise.reject(error); 
       });
+
     }
 
     return (

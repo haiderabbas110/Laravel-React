@@ -6,10 +6,12 @@ import App from './App';
 
 import reportWebVitals from './reportWebVitals';
 import history from './history'
+import Header from './components/Sementics/Header/Header';
 
 
 ReactDOM.render(
   <BrowserRouter history={history}>
+    {/* <Header /> */}
     <App />
   </BrowserRouter>,
 
