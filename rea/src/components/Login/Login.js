@@ -6,30 +6,41 @@ import PropTypes from 'prop-types';
 import { useNavigate } from 'react-router';
 import Image from "react-bootstrap/Image";
 import './login.scss';
+import  AlertDismissible  from "../../AlertDismissible";
 
 
 function Login({setToken}){
-  let navigate = useNavigate();
+    let navigate = useNavigate();
 
     const axios = require('axios');
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [title, setTitle] = useState("");
+    const [submitted, setSubmitted] = useState("");
+  
+
+    const props = {
+      title:title,
+      description:"",
+      display:true,
+      setShow:true,
+      type:"danger"
+    }
 
     function validateForm() {
       //return email.length > 0 && password.length > 0;
       return true;
     }
 
-    function handleSubmit(event) {
+    async function handleSubmit(event) {
       event.preventDefault();
       const userData = {
         email: email,
         password:password
       }
-
-      axios.post(path_server+"/api/login", userData)
+      await axios.post(path_server+"/api/login", userData)
       .then(res => {
-        console.log(res.length);
+      
         if (res.length === 0) {
           return Promise.reject(new Error("Empty list!"));
         }
@@ -39,17 +50,19 @@ function Login({setToken}){
         }
 
       }).catch(error => { 
-        
-        console.log(error); 
+        setSubmitted(true);
+        setTitle(error.response.statusText)
         return Promise.reject(error); 
       });
 
     }
 
     return (
-      <section className="headerBackground">
+      <section>
+        {submitted && <AlertDismissible props={props} />}
+      <div className="headerBackground">
+        
         <div className="loginLeft">
-
         <Image src="http://intranet.genetech.pk/intranet/assets/images/white_logo.png" fluid />
 
         </div>
@@ -75,6 +88,7 @@ function Login({setToken}){
             </Form.Group>
             
           </Form>
+        </div>
         </div>
       </section>
     );

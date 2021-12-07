@@ -1,13 +1,24 @@
-import React from "react"
+import {React, useState, useEffect} from "react"
 import Image from "react-bootstrap/Image";
 import './header.scss';
-import { Navbar,Nav,NavDropdown,Form,FormControl,Button,Container } from 'react-bootstrap'
-
+import { Navbar,Nav } from 'react-bootstrap'
+import { useNavigate } from 'react-router';
+import useToken from '../../../useToken';
 
 
 
 function Header(){
-    const axios = require('axios');
+    const [show, setShow] = useState(false);
+    const settingHandle = () => show ? setShow(false) : setShow(true);
+    const { token, setToken } = useToken();
+    let navigate = useNavigate();
+
+    const logOut = () => {
+        setToken("");
+        navigate('/login');
+    }
+        
+   
     
     if(window.location.pathname === "/login"){
         return null
@@ -16,7 +27,7 @@ function Header(){
             <header className="geneHeader">
                 
                 <section className="leftHeadingSection">
-                    <Image src="http://intranet.genetech.pk/intranet/assets/images/red_logo.jpg" fluid />
+                    <Image src="../assets/header/logo.jpg" fluid />
       
                 </section>
                 <section className="rightHeadingSection">
@@ -72,10 +83,28 @@ function Header(){
                             <span className="userName">Haider Abbas</span>
                         </div>
                         <div className="setting">
-                            <span></span>
+                            <span onClick={settingHandle}></span>
 
                         </div>
 
+                        
+
+                       { show && <div className="dropdown">
+                            <ul>
+                                <li> 
+                                    <a href="#">Edit Profile</a>
+                                </li>
+                                <li> 
+                                    <a href="#">Change Password</a>
+                                </li>
+                                <li> 
+                                    <a href="#" onClick={logOut}>Logout</a>
+                                </li>
+                            </ul>
+                        </div>
+                        }
+
+                       
                     </div>
       
       
