@@ -1,0 +1,92 @@
+// Reset css
+*{
+    padding: 0;
+    margin: 0;
+    font-family: 'Roboto Condensed', sans-serif;
+    list-style: none;
+}
+a{
+    color:#d12127;
+    text-decoration: none;
+}
+.geneHeader{
+    .leftHeadingSection{
+        width: 18.5%;
+        float: left;
+        background: #fff;
+        padding: 0 0 0 12px;
+        box-sizing: border-box;
+        height: 100px;
+    }
+    .rightHeadingSection{
+        width: 81.5%;
+        box-sizing: border-box;
+        float: left;
+        height: 100px;
+        padding: 0 1.4%;
+        background: #d12127;
+        display: flex;
+        justify-content: space-between;
+        .nav{
+            ul{
+                display: flex;
+                li{
+                    a{
+                        display: flex;
+                        flex-direction: column;
+                        align-items: center;
+                        color:#fff;
+                        padding: 20px 30px;
+                    }
+                }
+            }
+        }
+        .heading{
+            h1{
+                font-size: 30px;
+                color:#fff;
+                font-weight: 400;
+                margin-top: 15px;
+            }
+            
+
+        }
+        .profile{
+            display: flex;
+            align-items: center;
+            .icon{
+                img{
+                    width: 61px;
+                    height: 61px;
+                    border-radius: 100%;
+                }
+            }
+            .text{
+                margin:0 15px;
+                color: #fff;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                .userName{
+                    font-size: 28px;
+                }
+                .welcome{
+                    font-size: 20px;
+                }
+            }
+            .setting{
+                margin-top: 20px;
+                span{
+                    cursor: pointer;
+                    border-radius: 5px;
+                    border:1px solid #fff;
+                    width: 25px;
+                    height: 25px;
+                    display: block;
+                }
+            }
+        }
+
+
+    }
+}

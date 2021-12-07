@@ -47,13 +47,13 @@ function Login({setToken}){
     }
 
     return (
-      <section class="headerBackground">
-        <div class="loginLeft">
+      <section className="headerBackground">
+        <div className="loginLeft">
 
         <Image src="http://intranet.genetech.pk/intranet/assets/images/white_logo.png" fluid />
 
         </div>
-        <div class="loginRight">
+        <div className="loginRight">
           <Form onSubmit={handleSubmit}>
             <Form.Group size="lg" controlId="email">
               <Form.Label>Email</Form.Label>

@@ -23,7 +23,6 @@ function App() {
     return (
     <>
          <div className="App">
-          <h1>Genetech Intranet!</h1>
         </div>
         <Routes>
             <Route path="/login" element={<Login />} />
