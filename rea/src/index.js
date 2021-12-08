@@ -5,12 +5,13 @@ import './index.css';
 import App from './App';
 
 import reportWebVitals from './reportWebVitals';
-import history from './history'
 import Header from './components/Sementics/Header/Header';
+import Sidebar from './components/Sementics/Sidebar/Sidebar';
 
 ReactDOM.render(
-  <BrowserRouter history={history}>
+  <BrowserRouter>
     <Header />
+    <Sidebar />
     <App />
   </BrowserRouter>,
 

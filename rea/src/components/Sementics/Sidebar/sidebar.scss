@@ -1,0 +1,24 @@
+.sideBarWrapper{
+    width: 18.7%;
+    float: left;
+    .search{
+            padding: 0 12px;
+            margin-top: 20px;
+    }
+    .sidebarNav{
+        width: 100%;
+        .navbar-nav{
+            li{
+                a{
+                    padding: 10px 12px;
+                    img{
+                        max-width: 42px;
+                        margin-right: 10px;
+                    }
+                }  
+            }
+            flex-direction: column;
+        }
+
+    }
+}

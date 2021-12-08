@@ -10,6 +10,8 @@ a{
     text-decoration: none;
 }
 .geneHeader{
+    float: left;
+    width: 100%;
     .leftHeadingSection{
         width: 18.5%;
         float: left;
@@ -85,7 +87,9 @@ a{
                     border:1px solid #fff;
                     width: 25px;
                     height: 25px;
-                    display: block;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
                 }
             }
             .dropdown{
@@ -96,6 +100,7 @@ a{
                
                 ul{
                     box-shadow: 0px 0px 8px 0px #505050;
+                    padding: 0;
                     li{
                         a{
                             color: #505050;

@@ -51,7 +51,9 @@ function Login({setToken}){
 
       }).catch(error => { 
         setSubmitted(true);
-        setTitle(error.response.statusText)
+        if(error){
+          setTitle(error.response.statusText)
+        }
         return Promise.reject(error); 
       });
 
@@ -63,7 +65,7 @@ function Login({setToken}){
       <div className="headerBackground">
         
         <div className="loginLeft">
-        <Image src="http://intranet.genetech.pk/intranet/assets/images/white_logo.png" fluid />
+        <Image src="../assets/login/white_logo.png" fluid />
 
         </div>
         <div className="loginRight">

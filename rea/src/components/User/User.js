@@ -26,37 +26,38 @@ function User(){
             setData(users);
         }).catch(error => { 
           navigate('/login');
-          /* console.log(error); 
-          return Promise.reject(error);  */
+          return Promise.reject(error); 
         });;
       }
 
 
     return (
-      <div className="Users">
+      <main class="main">
+          <div className="Users">
 
-          All Users
+              Genetech Team
 
-          <ul>
-             { 
-               Object.keys(data).map((anObjectMapped, index) => {
-                 const val = data[anObjectMapped];
+              <ul>
+                { 
+                  Object.keys(data).map((anObjectMapped, index) => {
+                    const val = data[anObjectMapped];
 
-                 return <li>
-                          <h3>{val.name}</h3>
-                          <span>{val.email}</span>
-                        </li>
-            })
+                    return <li>
+                              <h3>{val.name}</h3>
+                              <span>{val.email}</span>
+                            </li>
+                })
 
-              }
-          </ul>
+                  }
+              </ul>
 
-      <div>
-       
-    
-      </div>
-           
-      </div>
+          <div>
+          
+        
+          </div>
+              
+          </div>
+      </main>
     );
     }
 export default User;

@@ -17,9 +17,8 @@ function Header(){
         setToken("");
         navigate('/login');
     }
-        
+ 
    
-    
     if(window.location.pathname === "/login"){
         return null
     }else{
@@ -40,14 +39,14 @@ function Header(){
                                 <Nav.Item as="li" className="annoucements"> 
                                     
                                     <Nav.Link href="#home">
-                                        <Image src="http://intranet.genetech.pk/intranet/assets/images/announceIcon.png" />
+                                        <Image src="../assets/header/announceIcon.png" />
                                         Annoucements
                                     </Nav.Link>
                                 </Nav.Item>
                                 
                                 <Nav.Item as="li" className="discussions">
                                     <Nav.Link href="#features">
-                                        <Image src="http://intranet.genetech.pk/intranet/assets/images/discussionIcon.png" />
+                                        <Image src="../assets/header/discussionIcon.png" />
                                         Discussions
                                     </Nav.Link>
                                 </Nav.Item>
@@ -55,19 +54,19 @@ function Header(){
                                 <Nav.Item as="li" className="jobs">
                                     
                                     <Nav.Link href="#pricing">
-                                        <Image src="http://intranet.genetech.pk/intranet/assets/images/jobsIcon.png" />
+                                        <Image src="../assets/header/jobsIcon.png" />
                                         Jobs
                                     </Nav.Link>
                                 </Nav.Item>
                                 <Nav.Item as="li" className="leaveTools">
                                     <Nav.Link href="#pricing">
-                                        <Image src="http://intranet.genetech.pk/intranet/assets/images/leaveIcon.png" />
+                                        <Image src="../assets/header/leaveIcon.png" />
                                         Leave Tool
                                         </Nav.Link>
                                 </Nav.Item>
                                 <Nav.Item as="li" className="supportTicket">
                                     <Nav.Link href="#pricing">
-                                        <Image src="http://intranet.genetech.pk/intranet/assets/images/supportIcon.png" />
+                                        <Image src="../assets/header/supportIcon.png" />
                                         Support Ticket
                                     </Nav.Link>
                                 </Nav.Item>
@@ -83,7 +82,7 @@ function Header(){
                             <span className="userName">Haider Abbas</span>
                         </div>
                         <div className="setting">
-                            <span onClick={settingHandle}></span>
+                            <span onClick={settingHandle}><Image src="../assets/header/settingIcon2.png" className="rounded float-left" alt="..." /></span>
 
                         </div>
 
@@ -92,7 +91,7 @@ function Header(){
                        { show && <div className="dropdown">
                             <ul>
                                 <li> 
-                                    <a href="#">Edit Profile</a>
+                                    <a href="/profile">Edit Profile</a>
                                 </li>
                                 <li> 
                                     <a href="#">Change Password</a>

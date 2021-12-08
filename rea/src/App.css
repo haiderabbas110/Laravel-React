@@ -9,3 +9,12 @@
 .alertBox .toast-body{
   background: #d12127;
 }
+.main{
+  width: 81.3%;
+  float: left;
+  background: #eeeeee;
+  transition: 0.25s all ease;
+  box-sizing: border-box;
+  padding: 2%;
+  height: calc(100vh - 100px);
+}
