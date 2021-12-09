@@ -22,7 +22,7 @@ $router->group(['prefix' => 'api'], function () use ($router) {
     $router->get('profile', 'UserController@profile');
     $router->get('users/{id}', 'UserController@singleUser');
     $router->get('users', 'UserController@allUsers');
-    $router->get('search', 'UserController@search');
+    $router->get('searchUser', 'UserController@searchUser');
  
  });
 

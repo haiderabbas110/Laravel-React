@@ -4,38 +4,35 @@ import Image from "react-bootstrap/Image";
 import Form from "react-bootstrap/Form";
 import './sidebar.scss';
 
-import { Navbar,Nav } from 'react-bootstrap'
+import { Navbar,Nav, Button } from 'react-bootstrap'
 import { useNavigate } from 'react-router';
+import { Link } from 'react-router-dom';
 import useToken from '../../../useToken';
 
 
 
 function Sidebar(){
     const [search, setSearch] = useState("");
+    const [users, setUsers] = useState("");
     const { token, setToken } = useToken();
     const axios = require('axios');
     let navigate = useNavigate();
     
 
-    async function onChangeHandler(e) {
-       setSearch(e.target.value);
-      
-
-      setTimeout(function(){
+    function onChangeHandler(e) {
+       const searchVal = e.target.value;
+        setSearch(searchVal);
         const config = {
             headers: { Authorization: `Bearer ${token}` }
-          };
+        };
+        axios.get(path_server+"/api/searchUser?search_keyword="+searchVal, config)
+        .then(res => {
+            setUsers(res.data.data);
+        }).catch(error => { 
+        return Promise.reject(error); 
+        });
       
-            axios.get(path_server+"/api/search", config)
-            .then(res => {
-            
-
-            })
-
-        },500);
-        
       };
-
    
     if(window.location.pathname === "/login"){
         return null
@@ -51,7 +48,21 @@ function Sidebar(){
                     placeholder="Search Employee"
                     onChange={(e) => onChangeHandler(e)}
                 />
-      
+
+                <div className="searchResult">
+                    {
+                        Object.keys(users).map((anObjectMapped, index) => {
+                            const val = users[anObjectMapped];
+                            return <li>
+                                    <Link to={'/user'}>
+                                        <h3>{val.name}</h3>
+                                    </Link>
+                                      <span>{val.email}</span>
+                                    </li>
+                        })
+                    }
+                </div>
+
                 </section>
                 <section className="sidebarNav">
                     <div className="nav">

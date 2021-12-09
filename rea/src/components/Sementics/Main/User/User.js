@@ -1,11 +1,11 @@
-import { path_server, request_delay } from "../../Constants";
+import { path_server, request_delay } from "../../../../Constants";
 import React,{Component,useState, useEffect} from "react"
-import useToken from '../../useToken';
+import useToken from '../../../../useToken';
 import { useNavigate } from 'react-router';
 
 function User(){
     const axios = require('axios');
-    const { token, setToken } = useToken();
+      const { token, setToken } = useToken();
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [data, setData] = useState("");
@@ -27,12 +27,11 @@ function User(){
         }).catch(error => { 
           navigate('/login');
           return Promise.reject(error); 
-        });;
+        });
       }
 
 
     return (
-      <main class="main">
           <div className="Users">
 
               Genetech Team
@@ -57,7 +56,6 @@ function User(){
           </div>
               
           </div>
-      </main>
     );
     }
 export default User;

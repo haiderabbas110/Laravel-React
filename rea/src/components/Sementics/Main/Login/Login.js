@@ -1,4 +1,4 @@
-import { path_server} from "../../Constants";
+import { path_server} from "../../../../Constants";
 import React,{useState, useEffect} from "react"
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 import { useNavigate } from 'react-router';
 import Image from "react-bootstrap/Image";
 import './login.scss';
-import  AlertDismissible  from "../../AlertDismissible";
+import  AlertDismissible  from "../../../../AlertDismissible";
 
 
 function Login({setToken}){
@@ -15,12 +15,12 @@ function Login({setToken}){
     const axios = require('axios');
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const [title, setTitle] = useState("");
+    const [data, setData] = useState("");
     const [submitted, setSubmitted] = useState("");
   
 
     const props = {
-      title:title,
+      data:data,
       description:"",
       display:true,
       setShow:true,
@@ -52,7 +52,7 @@ function Login({setToken}){
       }).catch(error => { 
         setSubmitted(true);
         if(error){
-          setTitle(error.response.statusText)
+          setData(error.response.data)
         }
         return Promise.reject(error); 
       });

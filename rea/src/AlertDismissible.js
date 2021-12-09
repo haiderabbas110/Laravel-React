@@ -11,12 +11,14 @@ function AlertDismissible({props}) {
       <Col className="alertBox">
         <Toast onClose={() => setShow(false)} bg={props.type} show={show}>
           <Toast.Header>
-            <img
-              src="holder.js/20x20?text=%20"
-              className="rounded me-2"
-              alt=""
-            />
-            <strong className="me-auto">{props.title}</strong>
+            { 
+              Object.keys(props.data).map((anObjectMapped, index) => {
+                const val = props.data[anObjectMapped];
+  
+                 return  <strong className="">{val}</strong>
+            })
+            }
+          
           </Toast.Header>
           <Toast.Body>{props.description}</Toast.Body>
         </Toast>

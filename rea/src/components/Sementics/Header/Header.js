@@ -3,6 +3,7 @@ import Image from "react-bootstrap/Image";
 import './header.scss';
 import { Navbar,Nav } from 'react-bootstrap'
 import { useNavigate } from 'react-router';
+import { Link } from 'react-router-dom';
 import useToken from '../../../useToken';
 
 
@@ -13,7 +14,8 @@ function Header(){
     const { token, setToken } = useToken();
     let navigate = useNavigate();
 
-    const logOut = () => {
+    const logOut = (e) => {
+        e.preventDefault()
         setToken("");
         navigate('/login');
     }
@@ -91,13 +93,13 @@ function Header(){
                        { show && <div className="dropdown">
                             <ul>
                                 <li> 
-                                    <a href="/profile">Edit Profile</a>
+                                    <Link to={'/profile'}>Edit Profile</Link>
                                 </li>
                                 <li> 
-                                    <a href="#">Change Password</a>
+                                    <Link to={'/'}>Change password</Link>
                                 </li>
                                 <li> 
-                                    <a href="#" onClick={logOut}>Logout</a>
+                                    <Link to={'/'} onClick={logOut}>Logout</Link>
                                 </li>
                             </ul>
                         </div>

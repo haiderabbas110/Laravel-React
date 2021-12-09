@@ -61,14 +61,13 @@ class UserController extends Controller
      *
      * @return Response
      */
-    public function search(Request $request)
+    public function searchUser(Request $request)
     {
-        die("Asdfasdf");
-        $search = "%" . $request->search_keyword . "%";
+        $search = $request->search_keyword;
         try {
-            $data = User::table('users')->whereRaw("name LIKE ?", [$search])->get();
+            $data = User::where("name", 'like' , "%".$search.'%')->get();
             $res['success'] = true;
-            $res['data'] = $data;
+            $res['data'] =  $search ? $data : "";
             $res['message'] = "search item success";
             return response($res, 200);
         } catch (\Illuminate\Database\QueryException $ex) {
