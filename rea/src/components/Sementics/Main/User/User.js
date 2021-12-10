@@ -11,7 +11,7 @@ function User(){
     const [data, setData] = useState("");
     let navigate = useNavigate();
       const config = {
-        headers: { Authorization: `Bearer ${token}` }
+        headers: { Authorization: `Bearer ${token}`, 'csrf-token': '' }
       };
 
       useEffect(() => {

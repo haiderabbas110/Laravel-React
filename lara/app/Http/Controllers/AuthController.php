@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use  App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
+
 
 class AuthController extends Controller
 {
@@ -61,7 +63,7 @@ class AuthController extends Controller
 
         $credentials = $request->only(['email', 'password']);
 
-        if (! $token = Auth::attempt($credentials)) {
+        if (! $token = Auth::claims(['csrf-token' => Str::random(12)])->attempt($credentials)) {
             return response()->json(['message' => 'Unauthorized'], 401);
         }
 

@@ -16,6 +16,12 @@ class Kernel extends ConsoleKernel
         'App\Console\Commands\ClearViewCache'
     ];
 
+    protected $routeMiddleware = [
+       
+        'csrf' => \App\Http\Middleware\CsrfMiddleware::class,
+      
+    ];
+
     /**
      * Define the application's command schedule.
      *
