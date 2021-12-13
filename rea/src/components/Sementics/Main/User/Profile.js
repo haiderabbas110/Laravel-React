@@ -1,9 +1,8 @@
 import React,{useState, useEffect} from "react";
 import { Navigate } from 'react-router-dom';
 import { useSelector } from "react-redux";
-
-
 import UserService from "../../../../services/user.service";
+
 const Profile = () => {
   const { user: currentUser } = useSelector((state) => state.auth);
   const [user, setUser] = useState("");
@@ -19,24 +18,14 @@ const Profile = () => {
 
 
   const nowUser = () => {
-    UserService.getUserProfile().then(
-      (response) => {
-        setUser(response.data.user);
-      },
-      (error) => {
-        const _content =
-          (error.response && error.response.data) ||
-          error.message ||
-          error.toString();
-          setUser(_content);
-      }
-    );
-    
+    const userData = UserService.getUserProfile();
+
+    console.log(UserService.getUserProfile());
   }
 
   return (
-    <div className="container">
-      <header className="jumbotron">
+    <div>
+      <header>
         <h3>
           Hi, <strong>{user.name}</strong>
         </h3>

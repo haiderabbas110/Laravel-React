@@ -22,7 +22,7 @@ class UserController extends Controller
      *
      * @return Response
      */
-    public function profile()
+    public function user()
     {
         return response()->json(['user' => Auth::user()], 200);
     }

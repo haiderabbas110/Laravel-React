@@ -16,6 +16,10 @@ function Login(){
     const [password, setPassword] = useState("");
     const [data, setData] = useState("");
     const [submitted, setSubmitted] = useState("");
+    const [loading, setLoading] = useState(false);
+    const { isLoggedIn } = useSelector(state => state.auth);
+    const { message } = useSelector(state => state.message);
+
     const dispatch = useDispatch();
 
   
@@ -29,30 +33,39 @@ function Login(){
     }
 
     function validateForm() {
-      //return email.length > 0 && password.length > 0;
-      return true;
+      return email.length > 0 && password.length > 0;
+     // return true;
     }
 
     async function handleSubmit(event) {
       event.preventDefault();
-      if (1 == 1) {
+      setLoading(true);
+
+      //if (1 == 1) {
         dispatch(login(email, password))
           .then(() => {
             navigate('/profile')
             // window.location.reload();
           })
           .catch(() => {
-            //setLoading(false);
+            setLoading(false);
           });
-      } else {
-        //setLoading(false);
-      }
+      //} else {
+       // setLoading(false);
+     // }
 
     }
 
     return (
       <section>
-        {submitted && <AlertDismissible props={props} />}
+        {/* {submitted && <AlertDismissible props={props} />} */}
+        {message && (
+                <div className="form-group alertBox">
+                  <div className="alert alert-danger" role="alert">
+                    {message}
+                  </div>
+                </div>
+              )}
       <div className="headerBackground">
         
         <div className="loginLeft">
@@ -77,9 +90,13 @@ function Login(){
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
               />
-              <Button block size="lg" type="submit" disabled={!validateForm()}></Button>
+              <Button block size="lg" type="submit" disabled={!validateForm()}>
+              {loading && (
+                <span className="spinner-border spinner-border-sm"></span>
+              )}
+              </Button>
             </Form.Group>
-            
+          
           </Form>
         </div>
         </div>

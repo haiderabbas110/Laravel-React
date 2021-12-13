@@ -9,10 +9,26 @@ const getUserBoard = () => {
 };
 
 const getUserProfile = () => {
-  return axios.get(API_URL + "profile", { headers: authHeader() });
+  const UserService = axios.get(API_URL + "user", { headers: authHeader() });
+
+  UserService.then(
+    (response) => {
+      //setUser(response.data.user);
+      console.log(response);
+      return response;
+    },
+    (error) => {
+      const _content =
+        (error.response && error.response.data) ||
+        error.message ||
+        error.toString();
+        //setUser(_content);
+        return _content;
+    }
+  );
 };
 
-const getSearchUsers = () => {
+const getSearchUsers = (searchVal) => {
   return axios.get(API_URL + "searchUser?search_keyword="+searchVal, { headers: authHeader() });
 };
 

@@ -7,31 +7,33 @@ import './sidebar.scss';
 import { Navbar,Nav, Button } from 'react-bootstrap'
 import { useNavigate } from 'react-router';
 import { Link } from 'react-router-dom';
-import useToken from '../../../useToken';
+//import useToken from '../../../useToken';
+import UserService from "../../../services/user.service";
 
 
 
 function Sidebar(){
     const [search, setSearch] = useState("");
     const [users, setUsers] = useState("");
-    // const { token, setToken } = useToken();
-    // const axios = require('axios');
+    const [data, setData] = useState("");
+    const axios = require('axios');
     let navigate = useNavigate();
     
-
     function onChangeHandler(e) {
-       const searchVal = e.target.value;
+        const searchVal = e.target.value;
         setSearch(searchVal);
-        const config = {
-            headers: { Authorization: `Bearer ${token}` }
-        };
-        axios.get(path_server+"/api/searchUser?search_keyword="+searchVal, config)
-        .then(res => {
-            setUsers(res.data.data);
-        }).catch(error => { 
-        return Promise.reject(error); 
-        });
-      
+        UserService.getSearchUsers(searchVal).then(
+            (response) => {
+                setUsers(response.data.data);
+            },
+            (error) => {
+              const _content =
+                (error.response && error.response.data) ||
+                error.message ||
+                error.toString();
+                setData(_content);
+            }
+          );
       };
    
     if(window.location.pathname === "/login"){
@@ -48,19 +50,20 @@ function Sidebar(){
                     placeholder="Search Employee"
                     onChange={(e) => onChangeHandler(e)}
                 />
-
                 <div className="searchResult">
-                    {
-                        Object.keys(users).map((anObjectMapped, index) => {
-                            const val = users[anObjectMapped];
-                            return <li>
-                                    <Link to={'/user'}>
-                                        <h3>{val.name}</h3>
-                                    </Link>
-                                      <span>{val.email}</span>
-                                    </li>
-                        })
-                    }
+                    <ul>
+                        {
+                            Object.keys(users).map((anObjectMapped, index) => {
+                                const val = users[anObjectMapped];
+                                return <li>
+                                        <Link to={'/user'}>
+                                            <h3>{val.name}</h3>
+                                        </Link>
+                                        <span>{val.email}</span>
+                                        </li>
+                            })
+                        }
+                    </ul>
                 </div>
 
                 </section>
