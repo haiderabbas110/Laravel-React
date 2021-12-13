@@ -8,11 +8,16 @@ import reportWebVitals from './reportWebVitals';
 import Header from './components/Sementics/Header/Header';
 import Sidebar from './components/Sementics/Sidebar/Sidebar';
 
+import { Provider } from 'react-redux'
+import store from './store'
+
 ReactDOM.render(
   <BrowserRouter>
-    <Header />
-    <Sidebar />
-    <App />
+    <Provider store={store}>
+      <Header />
+      <Sidebar />
+      <App />
+    </Provider>
   </BrowserRouter>,
 
   document.getElementById("root")

@@ -1,22 +1,23 @@
-import { path_server} from "../../../../Constants";
 import React,{useState, useEffect} from "react"
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
-import PropTypes from 'prop-types';
 import { useNavigate } from 'react-router';
 import Image from "react-bootstrap/Image";
 import './login.scss';
 import  AlertDismissible  from "../../../../AlertDismissible";
+import { useDispatch, useSelector } from "react-redux";
+import { login } from "../../../../actions/auth";
 
 
-function Login({setToken}){
+function Login(){
     let navigate = useNavigate();
 
-    const axios = require('axios');
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [data, setData] = useState("");
     const [submitted, setSubmitted] = useState("");
+    const dispatch = useDispatch();
+
   
 
     const props = {
@@ -34,28 +35,18 @@ function Login({setToken}){
 
     async function handleSubmit(event) {
       event.preventDefault();
-      const userData = {
-        email: email,
-        password:password
+      if (1 == 1) {
+        dispatch(login(email, password))
+          .then(() => {
+            navigate('/profile')
+            // window.location.reload();
+          })
+          .catch(() => {
+            //setLoading(false);
+          });
+      } else {
+        //setLoading(false);
       }
-      await axios.post(path_server+"/api/login", userData)
-      .then(res => {
-      
-        if (res.length === 0) {
-          return Promise.reject(new Error("Empty list!"));
-        }
-        if(res){
-          setToken(res.data.token);
-          navigate('/user')
-        }
-
-      }).catch(error => { 
-        setSubmitted(true);
-        if(error){
-          setData(error.response.data)
-        }
-        return Promise.reject(error); 
-      });
 
     }
 
@@ -97,6 +88,3 @@ function Login({setToken}){
 }
 
 export default Login;
-Login.propTypes = {
-  setToken: PropTypes.func.isRequired
-};

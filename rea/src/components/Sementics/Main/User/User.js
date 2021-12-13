@@ -1,33 +1,30 @@
-import { path_server, request_delay } from "../../../../Constants";
-import React,{Component,useState, useEffect} from "react"
-import useToken from '../../../../useToken';
+import React,{useState, useEffect} from "react"
 import { useNavigate } from 'react-router';
+import UserService from "../../../../services/user.service";
 
 function User(){
-    const axios = require('axios');
-      const { token, setToken } = useToken();
-    const [name, setName] = useState("");
-    const [email, setEmail] = useState("");
     const [data, setData] = useState("");
-    let navigate = useNavigate();
-      const config = {
-        headers: { Authorization: `Bearer ${token}`, 'csrf-token': '' }
-      };
 
       useEffect(() => {
         allUsers();
       },[]);
 
-      const allUsers = () => {
+      
 
-        axios.get(path_server+"/api/users", config)
-        .then(res => {
-            const users = res.data.users;
-            setData(users);
-        }).catch(error => { 
-          navigate('/login');
-          return Promise.reject(error); 
-        });
+      const allUsers = () => {
+        UserService.getUserBoard().then(
+          (response) => {
+            setData(response.data.users);
+          },
+          (error) => {
+            const _content =
+              (error.response && error.response.data) ||
+              error.message ||
+              error.toString();
+              setData(_content);
+          }
+        );
+        
       }
 
 

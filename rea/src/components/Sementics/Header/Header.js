@@ -4,20 +4,23 @@ import './header.scss';
 import { Navbar,Nav } from 'react-bootstrap'
 import { useNavigate } from 'react-router';
 import { Link } from 'react-router-dom';
-import useToken from '../../../useToken';
+import { logout } from "../../../actions/auth";
+import { useDispatch, useSelector } from "react-redux";
+
 
 
 
 function Header(){
     const [show, setShow] = useState(false);
     const settingHandle = () => show ? setShow(false) : setShow(true);
-    const { token, setToken } = useToken();
+    const dispatch = useDispatch();
     let navigate = useNavigate();
+
 
     const logOut = (e) => {
         e.preventDefault()
-        setToken("");
-        navigate('/login');
+        dispatch(logout());
+        navigate('/login')
     }
  
    

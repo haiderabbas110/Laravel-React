@@ -14,8 +14,8 @@ import useToken from '../../../useToken';
 function Sidebar(){
     const [search, setSearch] = useState("");
     const [users, setUsers] = useState("");
-    const { token, setToken } = useToken();
-    const axios = require('axios');
+    // const { token, setToken } = useToken();
+    // const axios = require('axios');
     let navigate = useNavigate();
     
 
