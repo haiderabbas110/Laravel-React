@@ -12,7 +12,13 @@ import { clearMessage } from "./actions/message";
 
 function App() {
 
-  const { user: currentUser } = useSelector((state) => state.auth);
+  // const { user: currentUser } = useSelector((state) => state.auth);
+/*   const { 
+    user: currentUser, 
+    userData: currentUserData,
+  } = useSelector((state) => state.auth); */
+
+  // console.log(useSelector((state) => state.auth));
   const dispatch = useDispatch();
 
   useEffect(() => {

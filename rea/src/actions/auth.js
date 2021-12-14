@@ -4,10 +4,12 @@ import {
   LOGIN_SUCCESS,
   LOGIN_FAIL,
   LOGOUT,
+  USER_DATA,
   SET_MESSAGE,
 } from "./type";
 
 import AuthService from "../services/auth.service";
+import UserService from "../services/user.service";
 
 export const register = (username, email, password) => (dispatch) => {
   return AuthService.register(username, email, password).then(
@@ -72,6 +74,22 @@ export const login = (username, password) => (dispatch) => {
         payload: message,
       });
 
+      return Promise.reject();
+    }
+  );
+};
+
+export const LoggedInUser = () => (dispatch) => {
+  return UserService.getUserProfile().then(
+    (data) => {
+      dispatch({
+        type: USER_DATA,
+        payload: { userData: data },
+      });
+
+      return Promise.resolve();
+    },
+    (error) => {
       return Promise.reject();
     }
   );

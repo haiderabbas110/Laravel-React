@@ -15,7 +15,7 @@ function Header(){
     const settingHandle = () => show ? setShow(false) : setShow(true);
     const dispatch = useDispatch();
     let navigate = useNavigate();
-
+    const state = useSelector((state) => state.auth);
 
     const logOut = (e) => {
         e.preventDefault()
@@ -84,14 +84,12 @@ function Header(){
                         </div>
                         <div className="text">
                             <span className="welcome">Welcom</span>
-                            <span className="userName">Haider Abbas</span>
+                            <span className="userName">{state.userData.data.user.name.toUpperCase()}</span>
                         </div>
                         <div className="setting">
                             <span onClick={settingHandle}><Image src="../assets/header/settingIcon2.png" className="rounded float-left" alt="..." /></span>
 
                         </div>
-
-                        
 
                        { show && <div className="dropdown">
                             <ul>

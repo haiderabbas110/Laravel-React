@@ -3,6 +3,7 @@ import {
     REGISTER_FAIL,
     LOGIN_SUCCESS,
     LOGIN_FAIL,
+    USER_DATA,
     LOGOUT,
   } from "../actions/type";
   
@@ -43,6 +44,12 @@ import {
           ...state,
           isLoggedIn: false,
           user: null,
+        };
+      case USER_DATA:
+        return {
+          ...state,
+          isLoggedIn: true,
+          userData: payload.userData,
         };
       default:
         return state;

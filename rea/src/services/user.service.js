@@ -9,23 +9,8 @@ const getUserBoard = () => {
 };
 
 const getUserProfile = () => {
-  const UserService = axios.get(API_URL + "user", { headers: authHeader() });
+  return axios.get(API_URL + "user", { headers: authHeader() });
 
-  UserService.then(
-    (response) => {
-      //setUser(response.data.user);
-      console.log(response);
-      return response;
-    },
-    (error) => {
-      const _content =
-        (error.response && error.response.data) ||
-        error.message ||
-        error.toString();
-        //setUser(_content);
-        return _content;
-    }
-  );
 };
 
 const getSearchUsers = (searchVal) => {
