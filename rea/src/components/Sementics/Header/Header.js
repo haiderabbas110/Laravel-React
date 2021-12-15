@@ -1,4 +1,4 @@
-import {React, useState, useEffect} from "react"
+import {React, useState} from "react"
 import Image from "react-bootstrap/Image";
 import './header.scss';
 import { Navbar,Nav } from 'react-bootstrap'
@@ -8,31 +8,26 @@ import { logout } from "../../../actions/auth";
 import { useDispatch, useSelector } from "react-redux";
 
 
-
-
 function Header(){
     const [show, setShow] = useState(false);
     const settingHandle = () => show ? setShow(false) : setShow(true);
     const dispatch = useDispatch();
     let navigate = useNavigate();
     const state = useSelector((state) => state.auth);
-
+    console.log(state);
     const logOut = (e) => {
         e.preventDefault()
         dispatch(logout());
         navigate('/login')
     }
- 
    
     if(window.location.pathname === "/login"){
         return null
     }else{
         return (
             <header className="geneHeader">
-                
                 <section className="leftHeadingSection">
                     <Image src="../assets/header/logo.jpg" fluid />
-      
                 </section>
                 <section className="rightHeadingSection">
                     <div className="heading">
@@ -84,7 +79,7 @@ function Header(){
                         </div>
                         <div className="text">
                             <span className="welcome">Welcom</span>
-                            <span className="userName">{state.userData.data.user.name.toUpperCase()}</span>
+                            {/* <span className="userName">{state.userData.data.user.name.toUpperCase()}</span> */}
                         </div>
                         <div className="setting">
                             <span onClick={settingHandle}><Image src="../assets/header/settingIcon2.png" className="rounded float-left" alt="..." /></span>
@@ -105,16 +100,10 @@ function Header(){
                             </ul>
                         </div>
                         }
-
-                       
                     </div>
-      
-      
                 </section>
-                
             </header>
         )
     }
-
 }
 export default Header;

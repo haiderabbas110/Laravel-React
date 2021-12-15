@@ -1,4 +1,4 @@
-import React,{useState, useEffect} from "react"
+import React,{useEffect} from "react"
 import { Route, Routes } from "react-router";
 import './App.css';
 import Login from './components/Sementics/Main/Login/Login';
@@ -6,7 +6,7 @@ import User from './components/Sementics/Main/User/User';
 import Main from './components/Sementics/Main/Main';
 import Profile from './components/Sementics/Main/User/Profile';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { clearMessage } from "./actions/message";
 
 

@@ -8,7 +8,7 @@ import {
 
 function Main({setToken}){
     return (
-        <main class="main">
+        <main className="main">
             <Outlet />
         </main>
     );

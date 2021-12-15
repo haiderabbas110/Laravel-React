@@ -24,11 +24,11 @@ const Profile = () => {
     UserService.getUserProfile().then(
       (response) => {
         setUser(response.data.user);
-        dispatch(LoggedInUser(response.data.user))
+       /*  dispatch(LoggedInUser(response.data.user))
         .then(() => {
         })
         .catch(() => {
-        });
+        }); */
         return response;
       },
       (error) => {
