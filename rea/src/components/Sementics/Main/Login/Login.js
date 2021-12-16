@@ -7,6 +7,8 @@ import './login.scss';
 import  AlertDismissible  from "../../../../AlertDismissible";
 import { useDispatch, useSelector } from "react-redux";
 import { login } from "../../../../actions/auth";
+import UserService from "../../../../services/user.service";
+import { LoggedInUser } from "../../../../actions/auth";
 
 
 function Login(){
@@ -41,19 +43,14 @@ function Login(){
       event.preventDefault();
       setLoading(true);
 
-      //if (1 == 1) {
+    
         dispatch(login(email, password))
           .then(() => {
-            navigate('/profile')
-            // window.location.reload();
+            navigate('/profile');
           })
           .catch(() => {
             setLoading(false);
-          });
-      //} else {
-       // setLoading(false);
-     // }
-
+        });
     }
 
     return (
