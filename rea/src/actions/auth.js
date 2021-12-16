@@ -79,8 +79,13 @@ export const login = (username, password) => (dispatch) => {
   );
 };
 
-export const LoggedInUser = () => (dispatch) => {
-  return UserService.getUserProfile().then(
+export const LoggedInUser = (data) => (dispatch) => {
+  
+  dispatch({
+    type: USER_DATA,
+    payload: { userData: data },
+  });
+ /*  return UserService.getUserProfile().then(
     (data) => {
       dispatch({
         type: USER_DATA,
@@ -92,7 +97,7 @@ export const LoggedInUser = () => (dispatch) => {
     (error) => {
       return Promise.reject();
     }
-  );
+  ); */
 };
 
 export const logout = () => (dispatch) => {

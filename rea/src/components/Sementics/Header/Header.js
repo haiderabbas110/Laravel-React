@@ -6,6 +6,8 @@ import { useNavigate } from 'react-router';
 import { Link } from 'react-router-dom';
 import { logout } from "../../../actions/auth";
 import { useDispatch, useSelector } from "react-redux";
+import UserService from "../../../services/user.service";
+import { LoggedInUser } from "../../../actions/auth";
 
 
 function Header(){
@@ -79,7 +81,7 @@ function Header(){
                         </div>
                         <div className="text">
                             <span className="welcome">Welcom</span>
-                            {/* <span className="userName">{state.userData.data.user.name.toUpperCase()}</span> */}
+                            <span className="userName">{state.userData && state.userData.name.toUpperCase()}</span>
                         </div>
                         <div className="setting">
                             <span onClick={settingHandle}><Image src="../assets/header/settingIcon2.png" className="rounded float-left" alt="..." /></span>

@@ -5,42 +5,20 @@ import UserService from "../../../../services/user.service";
 import { LoggedInUser } from "../../../../actions/auth";
 
 const Profile = () => {
-  /* const { user: currentUser } = useSelector((state) => state.auth);
-  const { userData: currentUserData } = useSelector((state) => state.auth); */
-
+  const { user: currentUser } = useSelector((state) => state.auth);
+  const { userData: currentUserData } = useSelector((state) => state.auth);
+console.log(currentUserData)
   const [user, setUser] = useState("");
   const dispatch = useDispatch();
-  
+ /*  
   useEffect(() => {
     nowUser();
-  },[]);
+  },[]) */;
 
   /* if (!currentUser) {
     return <Navigate to="/login" />;
   }
  */
-
-  const nowUser = () => {
-    UserService.getUserProfile().then(
-      (response) => {
-        setUser(response.data.user);
-       /*  dispatch(LoggedInUser(response.data.user))
-        .then(() => {
-        })
-        .catch(() => {
-        }); */
-        return response;
-      },
-      (error) => {
-        const _content =
-          (error.response && error.response.data) ||
-          error.message ||
-          error.toString();
-          setUser(_content);
-          return _content;
-      }
-    );
-  }
 
   return (
     <div>

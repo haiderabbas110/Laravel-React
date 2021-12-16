@@ -12,7 +12,7 @@ import {
     user: {}
   };
   
-  const initialState = state
+  const initialState = state.auth
     ? { isLoggedIn: true, state }
     : { isLoggedIn: false, state: null };
   

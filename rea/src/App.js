@@ -8,24 +8,30 @@ import Profile from './components/Sementics/Main/User/Profile';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useDispatch } from "react-redux";
 import { clearMessage } from "./actions/message";
+import UserService from "./services/user.service";
+import { LoggedInUser } from "./actions/auth";
 
 
 function App() {
 
-  // const { user: currentUser } = useSelector((state) => state.auth);
-/*   const { 
-    user: currentUser, 
-    userData: currentUserData,
-  } = useSelector((state) => state.auth); */
-
-  // console.log(useSelector((state) => state.auth));
   const dispatch = useDispatch();
 
   useEffect(() => {
-    //history.listen((location) => {
-      dispatch(clearMessage()); // clear message when changing location
-    //});
-  }, [dispatch]);
+    UserService.getUserProfile().then(
+      (response) => {
+        dispatch(LoggedInUser(response.data.user));
+      },
+      (error) => {
+        const _content =
+          (error.response && error.response.data) ||
+          error.message ||
+          error.toString();
+          return _content;
+      }
+    );
+  }, []);
+
+  
 
     return (
     <>
