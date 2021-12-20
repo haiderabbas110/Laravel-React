@@ -3,10 +3,10 @@ import ReactDOM from 'react-dom';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import './index.css';
 import App from './App';
+import '../node_modules/font-awesome/css/font-awesome.min.css'; 
 
 import reportWebVitals from './reportWebVitals';
-import Header from './components/Sementics/Header/Header';
-import Sidebar from './components/Sementics/Sidebar/Sidebar';
+
 
 import { Provider } from 'react-redux'
 import store from './store'
@@ -14,8 +14,6 @@ import store from './store'
 ReactDOM.render(
   <BrowserRouter>
     <Provider store={store}>
-      <Header />
-      <Sidebar />
       <App />
     </Provider>
   </BrowserRouter>,

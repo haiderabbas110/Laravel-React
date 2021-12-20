@@ -80,7 +80,7 @@ export const login = (username, password) => (dispatch) => {
 };
 
 export const LoggedInUser = (data) => (dispatch) => {
-  
+  console.log(data);
   dispatch({
     type: USER_DATA,
     payload: { userData: data },

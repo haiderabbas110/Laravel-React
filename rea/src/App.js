@@ -1,21 +1,23 @@
 import React,{useEffect} from "react"
 import { Route, Routes } from "react-router";
-import './App.css';
 import Login from './components/Sementics/Main/Login/Login';
 import User from './components/Sementics/Main/User/User';
 import Main from './components/Sementics/Main/Main';
-import Profile from './components/Sementics/Main/User/Profile';
+import Profile from './components/Sementics/Main/User/Profile/Profile';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import './App.scss';
 import { clearMessage } from "./actions/message";
 import UserService from "./services/user.service";
 import { LoggedInUser } from "./actions/auth";
+import Header from './components/Sementics/Header/Header';
+import Sidebar from './components/Sementics/Sidebar/Sidebar';
 
 
 function App() {
 
   const dispatch = useDispatch();
-
+  const { isLoggedIn } = useSelector(state => state.auth);
   useEffect(() => {
     UserService.getUserProfile().then(
       (response) => {
@@ -35,12 +37,25 @@ function App() {
 
     return (
     <>
+        {isLoggedIn && 
+          <>
+            <Header />
+            <Sidebar />
+          </> 
+        }
         <Routes>
-            <Route path="/login" element={<Login />} />
-            <Route element={<Main />}>
-              <Route path="/user" element={<User />} />
-              <Route path="/profile" element={<Profile />} />
-            </Route>
+            {!isLoggedIn && 
+              <> 
+                <Route path="/" element={<Login />} />
+                <Route path="/login" element={<Login />} />
+              </>
+            }
+            
+              <Route element={<Main />}>
+                <Route path="/user" element={<User />} />
+                <Route path="/profile" element={<Profile />} />
+              </Route>
+            
         </Routes>
     </>
 

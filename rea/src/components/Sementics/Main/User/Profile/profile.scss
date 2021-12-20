@@ -1,0 +1,37 @@
+.profileSection{
+    display: flex;
+    color: #565656;
+    .profileImage{
+        margin-right: 20px;
+        flex: 0.1;
+    }
+    .profileMeta{
+        flex: 1;
+        h3{
+            text-transform: capitalize;
+            i{
+                float: right;
+                cursor: pointer;
+            }
+        }
+        li{
+            padding: 15px 10px;
+            display: flex;
+            strong{
+                width: 20%;
+            }
+        }
+        ul li:nth-child(2n+1){
+            background-color: #e5e5e5;
+
+        }
+    }
+  
+}
+.editProfile {
+    .btn-primary{
+        background-color: var(--red-color);
+    }
+
+
+}

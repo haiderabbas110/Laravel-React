@@ -33,6 +33,11 @@ class AuthController extends Controller
             $user->email = $request->input('email');
             $plainPassword = $request->input('password');
             $user->password = app('hash')->make($plainPassword);
+            $user->emergency_number = $request->input('emergency_number');
+            $user->phone_number = $request->input('phone_number');
+            $user->skills = $request->input('skills');
+            $user->profile_image = $request->input('profile_image');
+            $user->designation = $request->input('designation');
 
             $user->save();
 

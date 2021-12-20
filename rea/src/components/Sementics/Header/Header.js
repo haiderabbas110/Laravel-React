@@ -6,9 +6,6 @@ import { useNavigate } from 'react-router';
 import { Link } from 'react-router-dom';
 import { logout } from "../../../actions/auth";
 import { useDispatch, useSelector } from "react-redux";
-import UserService from "../../../services/user.service";
-import { LoggedInUser } from "../../../actions/auth";
-
 
 function Header(){
     const [show, setShow] = useState(false);
@@ -16,7 +13,6 @@ function Header(){
     const dispatch = useDispatch();
     let navigate = useNavigate();
     const state = useSelector((state) => state.auth);
-    console.log(state);
     const logOut = (e) => {
         e.preventDefault()
         dispatch(logout());
