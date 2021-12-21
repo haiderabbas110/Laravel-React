@@ -76,4 +76,38 @@ class AuthController extends Controller
     }
 
 
+      /**
+     * Update user.
+     *
+     * @return Response
+     */
+    public function updateUser(Request $request)
+    {
+        try {
+
+            $user = new User;
+            dd($user);
+            $user->name = $request->input('name');
+            $user->email = $request->input('email');
+            $plainPassword = $request->input('password');
+            $user->password = app('hash')->make($plainPassword);
+            $user->emergency_number = $request->input('emergency_number');
+            $user->phone_number = $request->input('phone_number');
+            $user->skills = $request->input('skills');
+            $user->profile_image = $request->input('profile_image');
+            $user->designation = $request->input('designation');
+
+            $user->save();
+
+            //return successful response
+            return response()->json(['user' => $user, 'message' => 'CREATED'], 201);
+
+        } catch (\Exception $e) {
+            //return error message
+            return response()->json(['message' => 'User Registration Failed!'], 409);
+        }
+
+    }
+
+
 }

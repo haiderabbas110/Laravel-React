@@ -55,6 +55,7 @@ class UserController extends Controller
         }
 
     }
+    
 
     /**
      * Get one user.

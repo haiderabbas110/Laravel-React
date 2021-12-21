@@ -10,7 +10,17 @@ const getUserBoard = () => {
 
 const getUserProfile = () => {
   return axios.get(API_URL + "user", { headers: authHeader() });
+};
 
+const setUserProfile = (data) => {
+  return axios
+    .patch(API_URL + "user/update", {
+      data,
+    })
+   /*  .then((response) => {
+      return response.data;
+    });
+ */
 };
 
 const getSearchUsers = (searchVal) => {
@@ -20,5 +30,6 @@ const getSearchUsers = (searchVal) => {
 export default {
   getUserBoard,
   getUserProfile,
+  setUserProfile,
   getSearchUsers,
 };

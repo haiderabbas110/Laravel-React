@@ -6,25 +6,30 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import Image from "react-bootstrap/Image";
 import './profile.scss';
+import UserService from "../../../../../services/user.service";
+
 const Profile = () => {
-  const { isLoggedIn } = useSelector(state => state.auth);
   const { userData: currentUserData } = useSelector((state) => state.auth);
-  const [user, setUser] = useState("");
-  /* const [email, setEmail] = useState(currentUserData && currentUserData.email);
-  const [phone, setPhone] = useState(currentUserData && currentUserData.phone_number); */
+  const [show, setShow] = useState(false);
 
-
-//  console.log(currentUserData.email);
-    // const values = [true, 'sm-down', 'md-down', 'lg-down', 'xl-down', 'xxl-down'];
-    const [fullscreen, setFullscreen] = useState(true);
-    const [show, setShow] = useState(false);
-  
     function handleShow() {
       setShow(true);
     }
 
-    async function handleSubmit(event) {
-     
+    async function handleSubmit(id) {
+      UserService.setUserProfile(id).then(
+        (response) => {
+          //dispatch(LoggedInUser(response.data.user));
+        },
+        (error) => {
+          const _content =
+            (error.response && error.response.data) ||
+            error.message ||
+            error.toString();
+            return _content;
+        }
+      );
+
     }
 
   return (
@@ -65,11 +70,12 @@ const Profile = () => {
           <Modal.Title>Edit Profile</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-        <Form onSubmit={handleSubmit} className="editProfile">
+        <Form onClick={() => handleSubmit(currentUserData.id)  }  className="editProfile">
             <Form.Group size="lg" controlId="email">
               <Form.Label>Email</Form.Label>
               <Form.Control
                 autoFocus
+                disabled
                 type="email"
                 value={currentUserData.email}
                 // onChange={(e) => setEmail(e.target.value)}
@@ -99,7 +105,7 @@ const Profile = () => {
               />
             </Form.Group>
 
-            <Button block size="sm" type="submit" className="">
+            <Button block size="sm" type="button" className="">
                 Update
               </Button>
 
