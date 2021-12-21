@@ -84,18 +84,14 @@ class AuthController extends Controller
     public function updateUser(Request $request)
     {
         try {
-
             $user = new User;
-            dd($user);
-            $user->name = $request->input('name');
-            $user->email = $request->input('email');
-            $plainPassword = $request->input('password');
-            $user->password = app('hash')->make($plainPassword);
+            var_dump($user); die("asdffdsa");
+            
             $user->emergency_number = $request->input('emergency_number');
             $user->phone_number = $request->input('phone_number');
             $user->skills = $request->input('skills');
             $user->profile_image = $request->input('profile_image');
-            $user->designation = $request->input('designation');
+            // $user->designation = $request->input('designation');
 
             $user->save();
 

@@ -16,8 +16,8 @@ const Profile = () => {
       setShow(true);
     }
 
-    async function handleSubmit(id) {
-      UserService.setUserProfile(id).then(
+    async function handleSubmit() {
+      UserService.setUserProfile().then(
         (response) => {
           //dispatch(LoggedInUser(response.data.user));
         },

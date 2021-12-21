@@ -84,19 +84,6 @@ export const LoggedInUser = (data) => (dispatch) => {
     type: USER_DATA,
     payload: { userData: data },
   });
- /*  return UserService.getUserProfile().then(
-    (data) => {
-      dispatch({
-        type: USER_DATA,
-        payload: { userData: data },
-      });
-
-      return Promise.resolve();
-    },
-    (error) => {
-      return Promise.reject();
-    }
-  ); */
 };
 
 export const logout = () => (dispatch) => {
