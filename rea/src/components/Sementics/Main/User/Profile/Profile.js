@@ -7,19 +7,40 @@ import Button from "react-bootstrap/Button";
 import Image from "react-bootstrap/Image";
 import './profile.scss';
 import UserService from "../../../../../services/user.service";
+import { UpdateUser } from "../../../../../actions/auth";
 
 const Profile = () => {
-  const { userData: currentUserData } = useSelector((state) => state.auth);
+  const { userData: user } = useSelector((state) => state.auth);
+  const { message } = useSelector(state => state.message);
   const [show, setShow] = useState(false);
+  let [phone, setPhone] = useState();
+  const [emergency, setEmergency] = useState();
+  const [skills, setSkills] = useState();
+  const dispatch = useDispatch();
 
-    function handleShow() {
-      setShow(true);
+  useEffect(() => {
+    setPhone(user && user.phone_number);
+    setEmergency(user && user.emergency_number)
+    setSkills(user && user.skills)
+  },[user]);
+
+  function handleShow() {
+   
+    setShow(true);
+  }
+    const data = {
+      id : user && user.id,
+      phone :phone,
+      emergency :emergency,
+      skills:skills,
+
     }
-
-    async function handleSubmit() {
-      UserService.setUserProfile().then(
+    async function handleSubmit(event) {
+      event.preventDefault();
+     /*  UserService.setUserProfile(data).then(
         (response) => {
-          //dispatch(LoggedInUser(response.data.user));
+          
+         // dispatch(UpdateUser(response.data));
         },
         (error) => {
           const _content =
@@ -28,56 +49,71 @@ const Profile = () => {
             error.toString();
             return _content;
         }
-      );
+      ); */
+
+      dispatch(UpdateUser(data))
+      .then(() => {
+       // navigate('/profile');
+      })
+      .catch(() => {
+        //setLoading(false);
+    });
 
     }
 
   return (
     <section className="profileSection">
+      {/* {message && (
+                <div className="form-group alertBox">
+                  <div className="alert alert-success" role="alert">
+                    {message}
+                  </div>
+                </div>
+              )} */}
       <div className="profileImage">
         <Image src="https://via.placeholder.com/150" className="rounded float-left" alt="..." />
       </div>
-      {currentUserData && 
+      {user && 
       <div className="profileMeta">
         <h3>
-          <strong>{currentUserData.name}</strong>
+          <strong>{user.name}</strong>
           <i className="fa fa-edit fa-edit" onClick={() => handleShow()}></i>
         </h3>
          <p>
-          {currentUserData.designation}
+          {user.designation}
         </p>
         <ul>
           <li>
-            <strong>Email:</strong> {currentUserData.email}
+            <strong>Email:</strong> {user.email}
           </li>
           <li>
-            <strong>Cell Phone:</strong> {currentUserData.phone_number}
+            <strong>Cell Phone:</strong> {phone}
           </li>
           <li>
-            <strong>Emergency Contact:</strong> {currentUserData.emergency_number}
+            <strong>Emergency Contact:</strong> {emergency}
           </li>
           <li>
-            <strong>Skills:</strong> {currentUserData.skills}
+            <strong>Skills:</strong> {skills}
           </li>
         </ul>
       </div>
       }
 
-    {currentUserData && 
+    {user && 
       <>
       <Modal show={show} onHide={() => setShow(false)}>
         <Modal.Header closeButton>
           <Modal.Title>Edit Profile</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-        <Form onClick={() => handleSubmit(currentUserData.id)  }  className="editProfile">
+        <Form onSubmit={handleSubmit}  className="editProfile">
             <Form.Group size="lg" controlId="email">
               <Form.Label>Email</Form.Label>
               <Form.Control
                 autoFocus
                 disabled
                 type="email"
-                value={currentUserData.email}
+                value={user.email}
                 // onChange={(e) => setEmail(e.target.value)}
               />
             </Form.Group>
@@ -85,15 +121,17 @@ const Profile = () => {
               <Form.Label>Cell Phone</Form.Label>
               <Form.Control
                 type="text"
-                value={currentUserData.phone_number}
+                value={phone}
+                onChange={(e) => setPhone(e.target.value)}
               />
             </Form.Group>
 
-            <Form.Group size="lg" controlId="phone">
+            <Form.Group size="lg" controlId="emergency_phone">
               <Form.Label>Emergency Phone</Form.Label>
               <Form.Control
                 type="text"
-                value={currentUserData.emergency_number}
+                value={emergency}
+                onChange={(e) => setEmergency(e.target.value)}
               />
             </Form.Group>
 
@@ -101,11 +139,12 @@ const Profile = () => {
               <Form.Label>Skills</Form.Label>
               <Form.Control
                 type="text"
-                value={currentUserData.skills}
+                value={skills}
+                onChange={(e) => setSkills(e.target.value)}
               />
             </Form.Group>
 
-            <Button block size="sm" type="button" className="">
+            <Button block size="sm" type="submit" className="">
                 Update
               </Button>
 

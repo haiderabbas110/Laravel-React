@@ -5,6 +5,7 @@ import {
   LOGIN_FAIL,
   LOGOUT,
   USER_DATA,
+  UPDATE_USER,
   SET_MESSAGE,
 } from "./type";
 
@@ -82,8 +83,39 @@ export const login = (username, password) => (dispatch) => {
 export const LoggedInUser = (data) => (dispatch) => {
   dispatch({
     type: USER_DATA,
-    payload: { userData: data },
+    payload: { user: data },
   });
+};
+
+export const UpdateUser = (data) => (dispatch) => {
+  return UserService.setUserProfile(data).then(
+    (response) => {
+      dispatch({
+        type: UPDATE_USER,
+        payload: { user: response },
+      })
+      const message = response.message
+
+      dispatch({
+        type: SET_MESSAGE,
+        payload: message,
+      });
+    
+      return Promise.resolve();
+     
+    },
+    (error) => {
+      const _content =
+        (error.response && error.response.data) ||
+        error.message ||
+        error.toString();
+        return _content;
+    }
+  );
+  /* dispatch({
+    type: UPDATE_USER,
+    payload: { user: data },
+  }); */
 };
 
 export const logout = () => (dispatch) => {

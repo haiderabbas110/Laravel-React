@@ -7,8 +7,6 @@ import './login.scss';
 import  AlertDismissible  from "../../../../AlertDismissible";
 import { useDispatch, useSelector } from "react-redux";
 import { login } from "../../../../actions/auth";
-import UserService from "../../../../services/user.service";
-import { LoggedInUser } from "../../../../actions/auth";
 
 
 function Login(){
@@ -56,13 +54,13 @@ function Login(){
     return (
       <section>
         {/* {submitted && <AlertDismissible props={props} />} */}
-        {message && (
+        {/* {message && (
                 <div className="form-group alertBox">
                   <div className="alert alert-danger" role="alert">
                     {message}
                   </div>
                 </div>
-              )}
+              )} */}
       <div className="headerBackground">
         
         <div className="loginLeft">

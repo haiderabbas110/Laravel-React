@@ -83,24 +83,26 @@ class AuthController extends Controller
      */
     public function updateUser(Request $request)
     {
+        
         try {
-            $user = new User;
-            var_dump($user); die("asdffdsa");
-            
-            $user->emergency_number = $request->input('emergency_number');
-            $user->phone_number = $request->input('phone_number');
-            $user->skills = $request->input('skills');
-            $user->profile_image = $request->input('profile_image');
-            // $user->designation = $request->input('designation');
+           
+            $id = $request['data']['id'];
+            $user = User::find($id);
 
-            $user->save();
+            $user->emergency_number = $request['data']['emergency'];
+            $user->phone_number = $request['data']['phone'];
+            $user->skills = $request['data']['skills'];
+            //$user->profile_image = $request['data']['profile_image'];
+            
+
+            $user->update($request->all());
 
             //return successful response
-            return response()->json(['user' => $user, 'message' => 'CREATED'], 201);
+            return response()->json(['user' => $user, 'message' => 'UPDATED'], 201);
 
         } catch (\Exception $e) {
             //return error message
-            return response()->json(['message' => 'User Registration Failed!'], 409);
+            return response()->json(['message' => 'User Update Failed!'], 409);
         }
 
     }

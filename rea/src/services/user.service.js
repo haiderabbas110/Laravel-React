@@ -14,13 +14,13 @@ const getUserProfile = () => {
 
 const setUserProfile = (data) => {
   return axios
-    .patch(API_URL + "user/update", {
+    .post(API_URL + "user/update", {
       data,
     })
-   /*  .then((response) => {
+    .then((response) => {
       return response.data;
     });
- */
+
 };
 
 const getSearchUsers = (searchVal) => {

@@ -9,7 +9,6 @@ import {
   
   const state = {
     auth: JSON.parse(localStorage.getItem("user")),
-    user: {}
   };
   
   const initialState = state.auth
@@ -52,7 +51,7 @@ import {
         return {
           ...state,
           isLoggedIn: true,
-          userData: payload.userData,
+          userData: payload.user,
         };
       default:
         return state;
