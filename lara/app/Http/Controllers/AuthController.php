@@ -85,7 +85,6 @@ class AuthController extends Controller
     {
         
         try {
-           
             $id = $request['data']['id'];
             $user = User::find($id);
 

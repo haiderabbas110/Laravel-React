@@ -6,25 +6,30 @@
   padding:0;
 }
 .alertBox{
+  top: 110px;
+  right: 30px;
+  z-index: 999999;
+}
+/* .alertBox{
   position: fixed;
   top: 110px;
   right: 30px;
   z-index: 999999;
 }
 .alertBox .toast-header{
-  color:var(--red-color);
+  // color:var(--red-color);
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-}
+} */
 .alertBox .toast-body{
-  background: var(--red-color);
+  // background: var(--red-color);
 }
-.alertBox .btn-close{
+/* .alertBox .btn-close{
     position: absolute;
     right: 13px;
     top: 5px;
-}
+} */
 .main{
   width: 81.3%;
   float: left;

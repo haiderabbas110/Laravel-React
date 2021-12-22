@@ -9,7 +9,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { login } from "../../../../actions/auth";
 
 
-function Login(){
+const Login = () => {
     let navigate = useNavigate();
 
     const [email, setEmail] = useState("");
@@ -19,19 +19,17 @@ function Login(){
     const [loading, setLoading] = useState(false);
     const { isLoggedIn } = useSelector(state => state.auth);
     const { message } = useSelector(state => state.message);
-
     const dispatch = useDispatch();
 
-  
-
     const props = {
-      data:data,
-      description:"",
-      display:true,
-      setShow:true,
-      type:"danger"
+      message : message,
+      display : true,
+      type:"danger",
+      
     }
+    useEffect(() => {
 
+    },[]);
     function validateForm() {
       return email.length > 0 && password.length > 0;
      // return true;
@@ -53,7 +51,7 @@ function Login(){
 
     return (
       <section>
-        {/* {submitted && <AlertDismissible props={props} />} */}
+        {message && <AlertDismissible props={props} />}
         {/* {message && (
                 <div className="form-group alertBox">
                   <div className="alert alert-danger" role="alert">
