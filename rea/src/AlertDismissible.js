@@ -1,23 +1,31 @@
-import React,{useState} from "react"
-import Toast from 'react-bootstrap/Toast'
-import ToastContainer from 'react-bootstrap/ToastContainer'
+import React,{useState, useEffect} from "react"
+import Alert from 'react-bootstrap/Alert'
+import { useDispatch, useSelector } from "react-redux";
+import { clearMessage } from "./actions/message";
 
 const AlertDismissible = ({props}) => {
-  const [show, setShow] = useState(props.display);
-  
+  const [show, setShow] = useState(true);
+  const dispatch = useDispatch();
+  const onClose = () => {
+    setShow(false);
+  }
+  setTimeout(() => {
+    dispatch(clearMessage()); // clear message when changing location
+    setShow(false);
+  }, 2000);
+  useEffect(() => {
+    !props.loading  && setShow(true);
+  },[props])
+
   return (
-    <ToastContainer className="alertBox" position="top-end">
-        <Toast onClose={() => setShow(false)} bg={props.type} show={show} bg={props.type}>
-          <Toast.Header>
-            { 
-                  <strong className="">{props.message}</strong>
-            }
-          
-          </Toast.Header>
-          <Toast.Body>{props.description}</Toast.Body>
-        </Toast>
-      </ToastContainer>
-    
+    show &&  <Alert variant={props.type} onClose={onClose} dismissible className="position-fixed alertBox">
+    {/* <Alert.Heading>Error</Alert.Heading> */}
+    <p>
+      {props.message}
+    </p>
+    </Alert>
+  
   );
+  
 }
 export default AlertDismissible;

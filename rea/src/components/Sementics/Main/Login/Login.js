@@ -18,28 +18,23 @@ const Login = () => {
     const [submitted, setSubmitted] = useState("");
     const [loading, setLoading] = useState(false);
     const { isLoggedIn } = useSelector(state => state.auth);
-    const { message } = useSelector(state => state.message);
+    const { message, variant } = useSelector(state => state.message);
     const dispatch = useDispatch();
-
+  
     const props = {
       message : message,
-      display : true,
-      type:"danger",
-      
+      display : false,
+      type:variant,
+      loading:loading
     }
-    useEffect(() => {
 
-    },[]);
     function validateForm() {
       return email.length > 0 && password.length > 0;
-     // return true;
     }
 
     async function handleSubmit(event) {
       event.preventDefault();
       setLoading(true);
-
-    
         dispatch(login(email, password))
           .then(() => {
             navigate('/profile');
@@ -51,14 +46,7 @@ const Login = () => {
 
     return (
       <section>
-        {message && <AlertDismissible props={props} />}
-        {/* {message && (
-                <div className="form-group alertBox">
-                  <div className="alert alert-danger" role="alert">
-                    {message}
-                  </div>
-                </div>
-              )} */}
+      {message && <AlertDismissible props={props} />}
       <div className="headerBackground">
         
         <div className="loginLeft">

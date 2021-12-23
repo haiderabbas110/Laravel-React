@@ -1,21 +1,19 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-// import '../node_modules/font-awesome/css/font-awesome.min.css'; 
 import Modal from 'react-bootstrap/Modal'
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import Image from "react-bootstrap/Image";
 import './profile.scss';
-import UserService from "../../../../../services/user.service";
 import { UpdateUser } from "../../../../../actions/auth";
 
 const Profile = () => {
   const { userData: user } = useSelector((state) => state.auth);
-  const { message } = useSelector(state => state.message);
   const [show, setShow] = useState(false);
-  let [phone, setPhone] = useState();
+  const [phone, setPhone] = useState();
   const [emergency, setEmergency] = useState();
   const [skills, setSkills] = useState();
+  const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -25,51 +23,30 @@ const Profile = () => {
   },[user]);
 
   function handleShow() {
-   
     setShow(true);
   }
-    const data = {
-      id : user && user.id,
-      phone :phone,
-      emergency :emergency,
-      skills:skills,
 
-    }
-    async function handleSubmit(event) {
-      event.preventDefault();
-     /*  UserService.setUserProfile(data).then(
-        (response) => {
-          
-         // dispatch(UpdateUser(response.data));
-        },
-        (error) => {
-          const _content =
-            (error.response && error.response.data) ||
-            error.message ||
-            error.toString();
-            return _content;
-        }
-      ); */
-
-      dispatch(UpdateUser(data))
-      .then(() => {
-       // navigate('/profile');
-      })
-      .catch(() => {
-        //setLoading(false);
+  const data = {
+    id : user && user.id,
+    phone :phone,
+    emergency :emergency,
+    skills:skills,
+    loading:loading
+  }
+  
+ const handleSubmit = (event) => {
+    event.preventDefault();
+    setLoading(true);
+    dispatch(UpdateUser(data))
+    .then(() => {
+      setLoading(false);
+    })
+    .catch(() => {
     });
-
-    }
+  }
 
   return (
     <section className="profileSection">
-      {/* {message && (
-                <div className="form-group alertBox">
-                  <div className="alert alert-success" role="alert">
-                    {message}
-                  </div>
-                </div>
-              )} */}
       <div className="profileImage">
         <Image src="https://via.placeholder.com/150" className="rounded float-left" alt="..." />
       </div>
@@ -114,12 +91,12 @@ const Profile = () => {
                 disabled
                 type="email"
                 value={user.email}
-                // onChange={(e) => setEmail(e.target.value)}
               />
             </Form.Group>
             <Form.Group size="lg" controlId="phone">
               <Form.Label>Cell Phone</Form.Label>
               <Form.Control
+                required
                 type="text"
                 value={phone}
                 onChange={(e) => setPhone(e.target.value)}
@@ -145,11 +122,11 @@ const Profile = () => {
             </Form.Group>
 
             <Button block size="sm" type="submit" className="">
-                Update
+              {!loading &&  "Update" }
+                {loading && (
+                <span className="spinner-border spinner-border-sm"></span>
+              )}
               </Button>
-
-            
-          
           </Form>
         </Modal.Body>
       </Modal>

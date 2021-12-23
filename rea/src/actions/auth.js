@@ -56,15 +56,30 @@ export const login = (username, password) => (dispatch) => {
         payload: { user: data },
       });
 
+      const message = {
+        text: "LoggedIn Success.",
+        variant: "success"
+      }
+
+      dispatch({
+        type: SET_MESSAGE,
+        payload: message,
+      });
+
       return Promise.resolve();
     },
     (error) => {
-      const message =
+      const messageResponse =
         (error.response &&
           error.response.data &&
           error.response.data.message) ||
         error.message ||
         error.toString();
+
+      const message = {
+        text: messageResponse,
+        variant: "danger"
+      }
 
       dispatch({
         type: LOGIN_FAIL,
@@ -94,22 +109,26 @@ export const UpdateUser = (data) => (dispatch) => {
         type: UPDATE_USER,
         payload: { user: response },
       })
-      const message = response.message
+      const message = {
+        text: response.message,
+        variant: "success"
+      }
 
       dispatch({
         type: SET_MESSAGE,
         payload: message,
       });
-    
+
+
       return Promise.resolve();
-     
+
     },
     (error) => {
       const _content =
         (error.response && error.response.data) ||
         error.message ||
         error.toString();
-        return _content;
+      return _content;
     }
   );
   /* dispatch({

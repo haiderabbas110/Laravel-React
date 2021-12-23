@@ -97,7 +97,7 @@ class AuthController extends Controller
             $user->update($request->all());
 
             //return successful response
-            return response()->json(['user' => $user, 'message' => 'UPDATED'], 201);
+            return response()->json(['user' => $user, 'message' => 'User has been updated.'], 201);
 
         } catch (\Exception $e) {
             //return error message

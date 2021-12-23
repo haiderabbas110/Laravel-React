@@ -1,4 +1,4 @@
-import { SET_MESSAGE, CLEAR_MESSAGE } from "../actions/type";
+import { SET_MESSAGE, CLEAR_MESSAGE, MESSAGE_TYPE } from "../actions/type";
 
 const initialState = {};
 
@@ -7,7 +7,7 @@ export default function (state = initialState, action) {
 
   switch (type) {
     case SET_MESSAGE:
-      return { message: payload };
+      return { message: payload.text, variant: payload.variant };
 
     case CLEAR_MESSAGE:
       return { message: "" };

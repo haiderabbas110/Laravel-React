@@ -6,9 +6,17 @@
   padding:0;
 }
 .alertBox{
-  top: 110px;
+  top: 20px;
   right: 30px;
   z-index: 999999;
+  right: 20px;
+  padding-bottom: 0;
+  max-width: 300px;
+  width: 100%;
+}
+.alertBox .btn-close{
+  font-size: 12px;
+
 }
 /* .alertBox{
   position: fixed;
