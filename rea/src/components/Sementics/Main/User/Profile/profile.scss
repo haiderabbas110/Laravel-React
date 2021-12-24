@@ -1,52 +1,60 @@
-.profileSection{
+.profileSection {
     display: flex;
     color: #565656;
-    .profileImage{
+    .profileImage {
         margin-right: 20px;
         flex: 0.1;
+        position: relative;
+
+        input[type="file"]{
+            cursor: pointer;
+            position: absolute;
+            max-height: 150px;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+        }
     }
-    .profileMeta{
+    .profileMeta {
         flex: 1;
-        h3{
+        h3 {
             text-transform: capitalize;
-            i{
-                float: right;
+            i {
                 cursor: pointer;
+                display: inline-block;
+                margin-left: 20px;
+                font-size: 25px;
             }
         }
-        li{
+        li {
             padding: 15px 10px;
             display: flex;
-            strong{
+            strong {
                 width: 20%;
             }
         }
-        ul li:nth-child(2n+1){
+        ul li:nth-child(2n + 1) {
             background-color: #e5e5e5;
-
         }
     }
-  
 }
 .editProfile {
-    .btn-primary{
+    .btn-primary {
         background-color: var(--red-color);
-        border-color:var(--red-color);
-        padding:5px 10px;
+        border-color: var(--red-color);
+        padding: 5px 10px;
         font-size: 18px;
         float: right;
-        &:hover{
+        &:hover {
             background-color: var(--red-color);
-            border-color:var(--red-color);
+            border-color: var(--red-color);
         }
     }
-    div{
+    div {
         margin-bottom: 20px;
 
-        .form-label{
-                margin-bottom: 5px;
+        .form-label {
+            margin-bottom: 5px;
         }
     }
-
-
 }

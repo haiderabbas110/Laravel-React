@@ -1,4 +1,4 @@
-import {React, useState} from "react"
+import {React, useState, useEffect} from "react"
 import Image from "react-bootstrap/Image";
 import './header.scss';
 import { Navbar,Nav } from 'react-bootstrap'
@@ -9,6 +9,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 function Header(){
     const [show, setShow] = useState(false);
+    const [title, setTitle] = useState(false);
     const settingHandle = () => show ? setShow(false) : setShow(true);
     const dispatch = useDispatch();
     let navigate = useNavigate();
@@ -18,6 +19,10 @@ function Header(){
         dispatch(logout());
         navigate('/login')
     }
+
+    useEffect(() => {
+        setTitle(document.title);
+    },[navigate])
    
     if(window.location.pathname === "/login"){
         return null
@@ -29,7 +34,7 @@ function Header(){
                 </section>
                 <section className="rightHeadingSection">
                     <div className="heading">
-                        <h1>Heading</h1>
+                        <h1>{document.title}</h1>
                     </div>
                     <div className="nav">
                         <Navbar>
@@ -76,7 +81,7 @@ function Header(){
                             <Image src="https://via.placeholder.com/150" className="rounded float-left" alt="..." />
                         </div>
                         <div className="text">
-                            <span className="welcome">Welcom</span>
+                            <span className="welcome">Welcome</span>
                             <span className="userName">{state.userData && state.userData.name.toUpperCase()}</span>
                         </div>
                         <div className="setting">

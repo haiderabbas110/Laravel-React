@@ -83,7 +83,6 @@ class AuthController extends Controller
      */
     public function updateUser(Request $request)
     {
-        
         try {
             $id = $request['data']['id'];
             $user = User::find($id);
@@ -91,7 +90,7 @@ class AuthController extends Controller
             $user->emergency_number = $request['data']['emergency'];
             $user->phone_number = $request['data']['phone'];
             $user->skills = $request['data']['skills'];
-            //$user->profile_image = $request['data']['profile_image'];
+            $user->profile_image = $request['data']['profile'];
             
 
             $user->update($request->all());

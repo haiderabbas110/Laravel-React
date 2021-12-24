@@ -13,6 +13,7 @@ const Profile = () => {
   const [phone, setPhone] = useState();
   const [emergency, setEmergency] = useState();
   const [skills, setSkills] = useState();
+  const [profileImage, setProfileImage] = useState();
   const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
 
@@ -20,10 +21,22 @@ const Profile = () => {
     setPhone(user && user.phone_number);
     setEmergency(user && user.emergency_number)
     setSkills(user && user.skills)
+    setProfileImage(user && user.profile_image)
+    document.title = "Edit Profile";
   },[user]);
 
   function handleShow() {
     setShow(true);
+  }
+
+ 
+  const selectProfileImage = (event) => {
+    data.profile = event.target.files[0].name;
+    setLoading(true);
+    dispatch(UpdateUser(data))
+    .then(() => {
+      setLoading(false);
+    })
   }
 
   const data = {
@@ -31,7 +44,7 @@ const Profile = () => {
     phone :phone,
     emergency :emergency,
     skills:skills,
-    loading:loading
+    loading:loading,
   }
   
  const handleSubmit = (event) => {
@@ -48,6 +61,12 @@ const Profile = () => {
   return (
     <section className="profileSection">
       <div className="profileImage">
+      <Form.Control
+                required
+                type="file"
+                value=""
+                onChange={selectProfileImage}
+              />
         <Image src="https://via.placeholder.com/150" className="rounded float-left" alt="..." />
       </div>
       {user && 

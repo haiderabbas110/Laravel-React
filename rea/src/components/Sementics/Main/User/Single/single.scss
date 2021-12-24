@@ -1,0 +1,24 @@
+.userProfileDetails{
+    margin-bottom: 30px;
+    h3, span{
+        text-transform: capitalize;
+    }
+}
+.userProfile{
+    color: #565656;
+    .profileMeta{
+        width: 80%;
+        li{
+            padding: 15px 10px;
+            display: flex;
+            strong{
+                width: 20%;
+            }
+        }
+        ul li:nth-child(2n+1){
+            background-color: #e5e5e5;
+
+        }
+    }
+  
+}

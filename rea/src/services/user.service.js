@@ -12,6 +12,10 @@ const getUserProfile = () => {
   return axios.get(API_URL + "user", { headers: authHeader() });
 };
 
+const getSignleUser = (userID) => {
+  return axios.get(API_URL + "singleuser?id="+userID, { headers: authHeader() });
+};
+
 const setUserProfile = (data) => {
   return axios
     .post(API_URL + "user/update", {
@@ -31,5 +35,6 @@ export default {
   getUserBoard,
   getUserProfile,
   setUserProfile,
+  getSignleUser,
   getSearchUsers,
 };

@@ -2,12 +2,15 @@ import React,{useState, useEffect} from "react"
 import { useNavigate } from 'react-router';
 import UserService from "../../../../services/user.service";
 
-function User(){
+function Users(){
     const [data, setData] = useState("");
 
       useEffect(() => {
+        document.title = "Genetech Team";
         allUsers();
       },[]);
+
+      
 
       
 
@@ -30,9 +33,7 @@ function User(){
 
     return (
           <div className="Users">
-
-              Genetech Team
-
+              {document.title}
               <ul>
                 { 
                   Object.keys(data).map((anObjectMapped, index) => {
@@ -55,4 +56,4 @@ function User(){
           </div>
     );
     }
-export default User;
+export default Users;

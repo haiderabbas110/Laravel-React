@@ -1,23 +1,27 @@
-import { path_server} from "../../../Constants";
-import {React, useState, useEffect} from "react"
+import { path_server } from "../../../Constants";
+import { React, useState, useEffect } from "react"
 import Image from "react-bootstrap/Image";
 import Form from "react-bootstrap/Form";
 import './sidebar.scss';
+import { Route, useParams } from "react-router-dom";
 
-import { Navbar,Nav, Button } from 'react-bootstrap'
+
+import { Navbar, Nav, Button } from 'react-bootstrap'
 import { useNavigate } from 'react-router';
 import { Link } from 'react-router-dom';
 //import useToken from '../../../useToken';
 import UserService from "../../../services/user.service";
+import { useSearchParams } from "react-router-dom";
 
 
 
-function Sidebar(){
+
+function Sidebar() {
     const [search, setSearch] = useState("");
     const [users, setUsers] = useState("");
     const [data, setData] = useState("");
-    const axios = require('axios');
-    let navigate = useNavigate();
+    let [searchParams, setSearchParams] = useSearchParams();
+
     
     function onChangeHandler(e) {
         const searchVal = e.target.value;
@@ -27,66 +31,74 @@ function Sidebar(){
                 setUsers(response.data.data);
             },
             (error) => {
-              const _content =
-                (error.response && error.response.data) ||
-                error.message ||
-                error.toString();
+                const _content =
+                    (error.response && error.response.data) ||
+                    error.message ||
+                    error.toString();
                 setData(_content);
             }
-          );
-      };
-   
-    if(window.location.pathname === "/login"){
+        );
+    };
+
+    if (window.location.pathname === "/login") {
         return null
-    }else{
+    } else {
         return (
             <aside className="sideBarWrapper">
-                
+
                 <section className="search">
-                <Form.Control
-                    autoFocus
-                    type="text"
-                    value={search}
-                    placeholder="Search Employee"
-                    onChange={(e) => onChangeHandler(e)}
-                />
-                <div className="searchResult">
-                    <ul>
-                        {
-                            Object.keys(users).map((anObjectMapped, index) => {
-                                const val = users[anObjectMapped];
-                                return <li>
-                                        <Link to={'/user'}>
+                    <Form.Control
+                        autoFocus
+                        type="text"
+                        value={search}
+                        placeholder="Search Employee"
+                        onChange={(e) => onChangeHandler(e)}
+                    />
+                    <div className="searchResult">
+                        {users && <ul>
+                            {
+                                Object.keys(users).map((anObjectMapped, index) => {
+                                    const val = users[anObjectMapped];
+                                    const id = val.id;
+                                    return <Link to={`user/${id}`} >
+                                        <li>
                                             <h3>{val.name}</h3>
-                                        </Link>
-                                        <span>{val.email}</span>
+                                            <span>{val.email}</span>
                                         </li>
-                            })
+                                    </Link>
+                                })
+                            }
+                            <Link to={'/users'}>
+                                <li>
+                                    <h3><strong>Our Team</strong></h3>
+                                    <span>Show all team members</span>
+                                </li>
+                            </Link>
+                        </ul>
                         }
-                    </ul>
-                </div>
+                    </div>
 
                 </section>
                 <section className="sidebarNav">
                     <div className="nav">
                         <Navbar>
                             <Nav className as="ul" className="">
-                                <Nav.Item as="li"> 
+                                <Nav.Item as="li">
                                     <Nav.Link href="#home">
                                         <Image src="../assets/sidebar/db_icon.jpg" />
                                         My Dashboard
                                     </Nav.Link>
                                 </Nav.Item>
-                                
+
                                 <Nav.Item as="li">
                                     <Nav.Link href="#features">
                                         <Image src="../assets/sidebar/emp_function_icon.jpg" />
                                         Employee Functions
                                     </Nav.Link>
                                 </Nav.Item>
-                                
+
                                 <Nav.Item as="li">
-                                    
+
                                     <Nav.Link href="#pricing">
                                         <Image src="../assets/sidebar/education.jpg" />
                                         Education
@@ -96,7 +108,7 @@ function Sidebar(){
                                     <Nav.Link href="#pricing">
                                         <Image src="../assets/sidebar/coding-standards.jpg" />
                                         Coding Sandards
-                                        </Nav.Link>
+                                    </Nav.Link>
                                 </Nav.Item>
                                 <Nav.Item as="li">
                                     <Nav.Link href="#pricing">
@@ -144,7 +156,7 @@ function Sidebar(){
                         </Navbar>
                     </div>
                 </section>
-                
+
             </aside>
         )
     }

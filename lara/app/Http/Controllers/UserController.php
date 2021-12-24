@@ -42,8 +42,9 @@ class UserController extends Controller
      *
      * @return Response
      */
-    public function singleUser($id)
+    public function singleUser(Request $request)
     {
+        $id = $request->id;
         try {
             $user = User::findOrFail($id);
 
