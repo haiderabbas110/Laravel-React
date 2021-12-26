@@ -125,9 +125,22 @@ export const UpdateUser = (data) => (dispatch) => {
     },
     (error) => {
       const _content =
-        (error.response && error.response.data) ||
-        error.message ||
-        error.toString();
+      (error.response &&
+        error.response.data &&
+        error.response.data.message) ||
+      error.message ||
+      error.toString();
+// console.log(error.response.data['profile_image'][0]);
+        const message = {
+          text: _content,
+          variant: "danger"
+        }
+  
+        dispatch({
+          type: SET_MESSAGE,
+          payload: message,
+        });
+
       return _content;
     }
   );

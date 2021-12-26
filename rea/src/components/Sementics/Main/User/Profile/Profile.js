@@ -44,7 +44,7 @@ const Profile = () => {
     phone :phone,
     emergency :emergency,
     skills:skills,
-    loading:loading,
+    profile:null,
   }
   
  const handleSubmit = (event) => {
@@ -65,6 +65,7 @@ const Profile = () => {
                 required
                 type="file"
                 value=""
+                name="profile_image"
                 onChange={selectProfileImage}
               />
         <Image src="https://via.placeholder.com/150" className="rounded float-left" alt="..." />

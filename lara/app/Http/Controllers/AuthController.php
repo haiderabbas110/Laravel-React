@@ -83,15 +83,22 @@ class AuthController extends Controller
      */
     public function updateUser(Request $request)
     {
+
+        $this->validate($request, [
+            'profile_image' => 'image|mimes:jpg,png,jpeg,gif,svg|max:2048',
+        ]);
+
         try {
             $id = $request['data']['id'];
             $user = User::find($id);
-
+            $user->emergency_number = "22222";
             $user->emergency_number = $request['data']['emergency'];
             $user->phone_number = $request['data']['phone'];
             $user->skills = $request['data']['skills'];
             $user->profile_image = $request['data']['profile'];
-            
+            // $user->profile_image->store('public/images');
+            $path = $request->file('profile_image')->store('public/images');
+
 
             $user->update($request->all());
 
