@@ -144,10 +144,46 @@ export const UpdateUser = (data) => (dispatch) => {
       return _content;
     }
   );
-  /* dispatch({
-    type: UPDATE_USER,
-    payload: { user: data },
-  }); */
+};
+
+export const UpdateUserImage = (data) => (dispatch) => {
+  return UserService.setUserImage(data).then(
+    (response) => {
+      dispatch({
+        type: UPDATE_USER,
+        payload: { user: response },
+      })
+      const message = {
+        text: response.message,
+        variant: "success"
+      }
+      dispatch({
+        type: SET_MESSAGE,
+        payload: message,
+      });
+
+      return Promise.resolve();
+    },
+    (error) => {
+      const _content =
+      (error.response &&
+        error.response.data &&
+        error.response.data.message) ||
+      error.message ||
+      error.toString();
+        const message = {
+          text: _content,
+          variant: "danger"
+        }
+  
+        dispatch({
+          type: SET_MESSAGE,
+          payload: message,
+        });
+
+      return _content;
+    }
+  );
 };
 
 export const logout = () => (dispatch) => {

@@ -27,6 +27,17 @@ const setUserProfile = (data) => {
 
 };
 
+const setUserImage = (data) => {
+  return axios
+    .post(API_URL + "user/uploadimage", {
+      data,
+    })
+    .then((response) => {
+      return response.data;
+    });
+
+};
+
 const getSearchUsers = (searchVal) => {
   return axios.get(API_URL + "searchUser?search_keyword="+searchVal, { headers: authHeader() });
 };
@@ -35,6 +46,7 @@ export default {
   getUserBoard,
   getUserProfile,
   setUserProfile,
+  setUserImage,
   getSignleUser,
   getSearchUsers,
 };

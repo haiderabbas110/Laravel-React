@@ -84,10 +84,10 @@ class AuthController extends Controller
     public function updateUser(Request $request)
     {
 
-        $this->validate($request, [
+     /*    $this->validate($request, [
             'profile_image' => 'image|mimes:jpg,png,jpeg,gif,svg|max:2048',
         ]);
-
+ */
         try {
             $id = $request['data']['id'];
             $user = User::find($id);
@@ -96,9 +96,6 @@ class AuthController extends Controller
             $user->phone_number = $request['data']['phone'];
             $user->skills = $request['data']['skills'];
             $user->profile_image = $request['data']['profile'];
-            // $user->profile_image->store('public/images');
-            $path = $request->file('profile_image')->store('public/images');
-
 
             $user->update($request->all());
 
@@ -110,6 +107,28 @@ class AuthController extends Controller
             return response()->json(['message' => 'User Update Failed!'], 409);
         }
 
+    }
+
+    public function uploadimage(Request $request)
+    {
+      //check file
+      
+      /* if ($request->hasFile('profile_image'))
+      {
+       */  
+        print_r($request);
+        $folderPath = "upload-react/";
+        $file_tmp = $_FILES['file']['tmp_name'];
+        $file_ext = strtolower(end(explode('.',$_FILES['file']['name'])));
+        $file = $folderPath . uniqid() . '.'.$file_ext;
+        move_uploaded_file($file_tmp, $file);
+       
+        return response()->json(["message" => "Image Uploaded Succesfully"]);
+      /* } 
+      else
+      { */
+            return response()->json(["message" => "Select image first."]);
+    //   }
     }
 
 
