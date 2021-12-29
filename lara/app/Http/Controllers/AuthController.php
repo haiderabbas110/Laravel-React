@@ -111,24 +111,10 @@ class AuthController extends Controller
 
     public function uploadimage(Request $request)
     {
-      //check file
       
-      /* if ($request->hasFile('profile_image'))
-      {
-       */  
-        print_r($request);
-        $folderPath = "upload-react/";
-        $file_tmp = $_FILES['file']['tmp_name'];
-        $file_ext = strtolower(end(explode('.',$_FILES['file']['name'])));
-        $file = $folderPath . uniqid() . '.'.$file_ext;
-        move_uploaded_file($file_tmp, $file);
-       
-        return response()->json(["message" => "Image Uploaded Succesfully"]);
-      /* } 
-      else
-      { */
-            return response()->json(["message" => "Select image first."]);
-    //   }
+      dd($_FILES);
+
+
     }
 
 

@@ -105,10 +105,6 @@ export const LoggedInUser = (data) => (dispatch) => {
 export const UpdateUser = (data) => (dispatch) => {
   return UserService.setUserProfile(data).then(
     (response) => {
-      dispatch({
-        type: UPDATE_USER,
-        payload: { user: response },
-      })
       const message = {
         text: response.message,
         variant: "success"
@@ -149,10 +145,6 @@ export const UpdateUser = (data) => (dispatch) => {
 export const UpdateUserImage = (data) => (dispatch) => {
   return UserService.setUserImage(data).then(
     (response) => {
-      dispatch({
-        type: UPDATE_USER,
-        payload: { user: response },
-      })
       const message = {
         text: response.message,
         variant: "success"

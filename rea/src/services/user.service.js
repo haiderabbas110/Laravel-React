@@ -28,10 +28,9 @@ const setUserProfile = (data) => {
 };
 
 const setUserImage = (data) => {
+ 
   return axios
-    .post(API_URL + "user/uploadimage", {
-      data,
-    })
+    .post(API_URL + "user/uploadimage",data)
     .then((response) => {
       return response.data;
     });
