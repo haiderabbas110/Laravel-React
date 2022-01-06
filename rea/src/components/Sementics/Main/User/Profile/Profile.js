@@ -17,7 +17,6 @@ const Profile = () => {
   const [profileImage, setProfileImage] = useState(false);
   const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
-  const inputEl = useRef(null);
 
   useEffect(() => {
     setPhone(user && user.phone_number);
@@ -42,19 +41,19 @@ const Profile = () => {
     event.preventDefault()
     const formData = new FormData();
     formData.append("selectedFile", selectedFile);
+
+    const data = {
+      id: user && user.id,
+      profile:null,
+    }
+    
     setLoading(true);
-    dispatch(UpdateUserImage(formData))
+    dispatch(UpdateUserImage(data))
       .then(() => {
         setLoading(false);
       })
   }
 
-  useEffect(() => {
-  if(profileImage){
-    inputEl.current.submit();
-
-  }
-  }, [profileImage]);
 
 
   const data = {
@@ -80,7 +79,8 @@ const Profile = () => {
   return (
     <section className="profileSection">
       <div className="profileImage">
-        <form onSubmit={handleSubmitImage} ref={inputEl}>
+        <form>
+        <input type="submit" value="submit" onClick={handleSubmitImage} />
           <Form.Control
             required
             type="file"

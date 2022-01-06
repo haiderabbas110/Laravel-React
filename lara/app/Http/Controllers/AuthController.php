@@ -18,7 +18,7 @@ class AuthController extends Controller
      */
     public function register(Request $request)
     {
-        
+
         //validate incoming request 
         $this->validate($request, [
             'name' => 'required|string',
@@ -43,15 +43,13 @@ class AuthController extends Controller
 
             //return successful response
             return response()->json(['user' => $user, 'message' => 'CREATED'], 201);
-
         } catch (\Exception $e) {
             //return error message
             return response()->json(['message' => 'User Registration Failed!'], 409);
         }
-
     }
 
-     /**
+    /**
      * Get a JWT via given credentials.
      *
      * @param  Request  $request
@@ -59,7 +57,7 @@ class AuthController extends Controller
      */
     public function login(Request $request)
     {
-          
+
         //validate incoming request 
         $this->validate($request, [
             'email' => 'required|string',
@@ -68,7 +66,7 @@ class AuthController extends Controller
 
         $credentials = $request->only(['email', 'password']);
 
-        if (! $token = Auth::claims(['csrf-token' => Str::random(12)])->attempt($credentials)) {
+        if (!$token = Auth::claims(['csrf-token' => Str::random(12)])->attempt($credentials)) {
             return response()->json(['message' => 'Unauthorized'], 401);
         }
 
@@ -76,7 +74,7 @@ class AuthController extends Controller
     }
 
 
-      /**
+    /**
      * Update user.
      *
      * @return Response
@@ -84,7 +82,7 @@ class AuthController extends Controller
     public function updateUser(Request $request)
     {
 
-     /*    $this->validate($request, [
+        /*    $this->validate($request, [
             'profile_image' => 'image|mimes:jpg,png,jpeg,gif,svg|max:2048',
         ]);
  */
@@ -101,21 +99,24 @@ class AuthController extends Controller
 
             //return successful response
             return response()->json(['user' => $user, 'message' => 'User has been updated.'], 201);
-
         } catch (\Exception $e) {
             //return error message
             return response()->json(['message' => 'User Update Failed!'], 409);
         }
-
     }
 
-    public function uploadimage(Request $request)
+    public function uploadimage(Request $req)
     {
-      
-      dd($_FILES);
 
+        dd(auth()->user());
+        $id = 1;
+        $user = User::find($id);
 
+        if ($req->file()) {
+            $fileName = time() . '_' . $req->file('selectedFile')->getClientOriginalName();
+            $filePath = $req->file('selectedFile')->storeAs('public', $fileName, 'public');
+            $user->profile_image = '/storage/' . $filePath;
+            $user->save();
+        }
     }
-
-
 }
