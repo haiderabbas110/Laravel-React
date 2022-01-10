@@ -2,7 +2,7 @@ import axios from "axios";
 import authHeader from "./auth-header";
 
 import { path_server, request_delay } from "../Constants";
-const API_URL = path_server+"/api/";
+const API_URL = path_server + "/api/";
 
 const getUserBoard = () => {
   return axios.get(API_URL + "users", { headers: authHeader() });
@@ -13,13 +13,15 @@ const getUserProfile = () => {
 };
 
 const getSignleUser = (userID) => {
-  return axios.get(API_URL + "singleuser?id="+userID, { headers: authHeader() });
+  return axios.get(API_URL + "singleuser?id=" + userID, { headers: authHeader() });
 };
 
 const setUserProfile = (data) => {
   return axios
-    .post(API_URL + "user/update", {
+    .put(API_URL + "user", {
       data,
+    }, {
+      headers: authHeader()
     })
     .then((response) => {
       return response.data;
@@ -28,9 +30,9 @@ const setUserProfile = (data) => {
 };
 
 const setUserImage = (data) => {
- 
+
   return axios
-    .post(API_URL + "user/uploadimage",data)
+    .post(API_URL + "user/uploadimage", data)
     .then((response) => {
       return response.data;
     });
@@ -38,7 +40,7 @@ const setUserImage = (data) => {
 };
 
 const getSearchUsers = (searchVal) => {
-  return axios.get(API_URL + "searchUser?search_keyword="+searchVal, { headers: authHeader() });
+  return axios.get(API_URL + "searchUser?search_keyword=" + searchVal, { headers: authHeader() });
 };
 
 export default {

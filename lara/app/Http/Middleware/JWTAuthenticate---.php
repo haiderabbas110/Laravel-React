@@ -21,6 +21,7 @@ class JWTAuthenticate
      */
     public function handle($request, Closure $next, $guard = null)
     {
+        die("Asdfasdf");
         try {
             if(!$request->headers->has('csrf-token')) throw new TokenMismatchException();
             $rawToken = $request->cookie('token');

@@ -14,7 +14,7 @@ class UserController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        //$this->middleware('auth');
     }
 
     /**
@@ -76,6 +76,38 @@ class UserController extends Controller
             $res['success'] = false;
             $res['message'] = $ex->getMessage();
             return response($res, 500);
+        }
+    }
+
+    /**
+     * Update user.
+     *
+     * @return Response
+     */
+    public function updateUser(Request $request)
+    {
+
+
+        /*    $this->validate($request, [
+            'profile_image' => 'image|mimes:jpg,png,jpeg,gif,svg|max:2048',
+        ]);
+ */
+        try {
+            $id = $request['data']['id'];
+            $user = User::find($id);
+            $user->emergency_number = "22222";
+            $user->emergency_number = $request['data']['emergency'];
+            $user->phone_number = $request['data']['phone'];
+            $user->skills = $request['data']['skills'];
+            $user->profile_image = $request['data']['profile'];
+
+            $user->update($request->all());
+
+            //return successful response
+            return response()->json(['user' => $user, 'message' => 'User has been updated.'], 201);
+        } catch (\Exception $e) {
+            //return error message
+            return response()->json(['message' => 'User Update Failed!'], 409);
         }
     }
 
