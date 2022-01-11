@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use  App\Models\User;
+use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
 {
@@ -113,12 +114,14 @@ class UserController extends Controller
 
     public function uploadimage(Request $req)
     {
+        $url = Storage::url('/public/1641931369_haider1.jpg');
+        dd($url);
         $user = Auth::user();
         $id = $user->id;
         $user = User::find($id);
         if ($req->file()) {
             $fileName = time() . '_' . $req->file('selectedFile')->getClientOriginalName();
-            $filePath = $req->file('selectedFile')->storeAs('public', $fileName, 'public');
+            $filePath = $req->file('selectedFile')->storeAs('public', $fileName);
             $user->profile_image = '/storage/' . $filePath;
             $user->save();
         }
