@@ -111,4 +111,17 @@ class UserController extends Controller
         }
     }
 
+    public function uploadimage(Request $req)
+    {
+        $user = Auth::user();
+        $id = $user->id;
+        $user = User::find($id);
+        if ($req->file()) {
+            $fileName = time() . '_' . $req->file('selectedFile')->getClientOriginalName();
+            $filePath = $req->file('selectedFile')->storeAs('public', $fileName, 'public');
+            $user->profile_image = '/storage/' . $filePath;
+            $user->save();
+        }
+    }
+
 }

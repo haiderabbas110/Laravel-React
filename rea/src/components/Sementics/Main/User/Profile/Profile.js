@@ -34,21 +34,21 @@ const Profile = () => {
   const handleFileSelect = (event) => {
     event.preventDefault();
     setSelectedFile(event.target.files[0])
-    setProfileImage(true);
+    // setProfileImage(true);
   }
 
   const handleSubmitImage = (event) => {
     event.preventDefault()
     const formData = new FormData();
     formData.append("selectedFile", selectedFile);
+    
 
     const data = {
-      id: user && user.id,
-      profile:null,
+      profile:formData,
     }
     
     setLoading(true);
-    dispatch(UpdateUserImage(data))
+    dispatch(UpdateUserImage(formData))
       .then(() => {
         setLoading(false);
       })
@@ -65,7 +65,6 @@ const Profile = () => {
   }
 
   const handleSubmit = (event) => {
-    //  console.log(profileImage);
     event.preventDefault();
     setLoading(true);
     dispatch(UpdateUser(data))
@@ -79,7 +78,7 @@ const Profile = () => {
   return (
     <section className="profileSection">
       <div className="profileImage">
-        <form>
+      <Form>
         <input type="submit" value="submit" onClick={handleSubmitImage} />
           <Form.Control
             required
@@ -88,7 +87,7 @@ const Profile = () => {
             name="profile_image"
             onChange={handleFileSelect}
           />
-        </form>
+        </Form>
 
 
         <Image src="https://via.placeholder.com/150" className="rounded float-left" alt="..." />

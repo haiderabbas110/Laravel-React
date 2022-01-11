@@ -143,6 +143,7 @@ export const UpdateUser = (data) => (dispatch) => {
 };
 
 export const UpdateUserImage = (data) => (dispatch) => {
+  console.log(data);
   return UserService.setUserImage(data).then(
     (response) => {
       const message = {

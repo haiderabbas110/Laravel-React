@@ -18,10 +18,11 @@ $router->group(['prefix' => 'api'], function () use ($router) {
     $router->post('register', 'AuthController@register');
     $router->post('login', 'AuthController@login');
     
-    $router->post('user/uploadimage', 'AuthController@uploadimage');
+    
 
     $router->group(['middleware' => 'auth'], function () use ($router) {
         $router->put('user', 'UserController@updateUser');
+        $router->post('user', 'UserController@uploadimage');
         $router->get('user', 'UserController@user');
         $router->get('singleuser', 'UserController@singleUser');
         $router->get('users', 'UserController@allUsers');

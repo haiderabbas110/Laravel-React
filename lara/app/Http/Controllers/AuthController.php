@@ -80,24 +80,4 @@ class AuthController extends Controller
         return $this->respondWithToken($token);
     }
 
-
-
-    public function uploadimage(Request $req)
-    {
-
-        
-        echo "<pre>";
-        print_r (Auth::user());
-        echo "</pre>";die("asdfasdfasfsdf");
-        
-        $id = 1;
-        $user = User::find($id);
-
-        if ($req->file()) {
-            $fileName = time() . '_' . $req->file('selectedFile')->getClientOriginalName();
-            $filePath = $req->file('selectedFile')->storeAs('public', $fileName, 'public');
-            $user->profile_image = '/storage/' . $filePath;
-            $user->save();
-        }
-    }
 }
