@@ -1,0 +1,11 @@
+export const REGISTER_SUCCESS = "REGISTER_SUCCESS";
+export const REGISTER_FAIL = "REGISTER_FAIL";
+export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
+export const USER_DATA = "USER_DATA";
+export const UPDATE_USER = "UPDATE_USER";
+export const LOGIN_FAIL = "LOGIN_FAIL";
+export const LOGOUT = "LOGOUT";
+
+export const SET_MESSAGE = "SET_MESSAGE";
+export const MESSAGE_TYPE = "MESSAGE_TYPE";
+export const CLEAR_MESSAGE = "CLEAR_MESSAGE";

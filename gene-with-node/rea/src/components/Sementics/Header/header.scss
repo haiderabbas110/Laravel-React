@@ -1,0 +1,137 @@
+// Reset css
+*{
+    padding: 0;
+    margin: 0;
+    font-family: 'Roboto Condensed', sans-serif;
+    list-style: none;
+}
+a{
+    color:#d12127;
+    text-decoration: none;
+}
+.geneHeader{
+    float: left;
+    width: 100%;
+    .leftHeadingSection{
+        width: 18.5%;
+        float: left;
+        background: #fff;
+        box-sizing: border-box;
+        height: 100px;
+    }
+    .rightHeadingSection{
+        width: 81.5%;
+        box-sizing: border-box;
+        float: left;
+        height: 100px;
+        padding: 0 1.4%;
+        background: #d12127;
+        display: flex;
+        justify-content: space-between;
+        .nav{
+            .navbar{
+                padding: 0;
+            }
+            ul{
+                display: flex;
+                li{
+                    a{
+                        img{
+                            margin-bottom: 5px;
+                        }
+                        display: flex;
+                        flex-direction: column;
+                        align-items: center;
+                        color:#fff;
+                        padding:16px 20px;
+                        font-size: 15px;
+                    }
+                }
+            }
+        }
+        .heading{
+            h1{
+                font-size: 30px;
+                color:#fff;
+                font-weight: 400;
+                margin-top: 15px;
+            }
+            
+
+        }
+        .profile{
+            display: flex;
+            align-items: center;
+            .icon{
+                img{
+                    width: 61px;
+                    height: 61px;
+                    border-radius: 100%;
+                }
+            }
+            .text{
+                margin:0 15px;
+                color: #fff;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                .userName{
+                    font-size: 25px;
+                }
+                .welcome{
+                    font-size: 20px;
+                }
+            }
+            .setting{
+                margin-top: 20px;
+                span{
+                    cursor: pointer;
+                    border-radius: 5px;
+                    border:1px solid #fff;
+                    width: 25px;
+                    height: 25px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                }
+            }
+            .dropdown{
+                position: absolute;
+                width: 200px;
+                right: 20px;
+                top: 87px;
+               
+                ul{
+                    box-shadow: 0px 0px 8px 0px #505050;
+                    padding: 0;
+                    li{
+                        a{
+                            color: #505050;
+                            display: block;
+                            background: #fff;
+                            text-decoration: none;
+                            font-size: 13px;
+                            padding: 6% 8%;
+                            border-bottom: 1px solid #d5d5d5;
+                        }
+                    }
+                }
+                &:before{
+                    content: "";
+                    border-left: 10px solid transparent;
+                    border-right: 10px solid transparent;
+                    border-bottom: 10px solid #ffffff;
+                    position: absolute;
+                    width: 0px;
+                    float: right;
+                    right: 8px;
+                    display: block;
+                    top: -10px;
+                    
+                }
+            }
+        }
+
+
+    }
+}

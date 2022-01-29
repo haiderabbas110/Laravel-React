@@ -88,11 +88,6 @@ class UserController extends Controller
     public function updateUser(Request $request)
     {
 
-
-        /*    $this->validate($request, [
-            'profile_image' => 'image|mimes:jpg,png,jpeg,gif,svg|max:2048',
-        ]);
- */
         try {
             $id = $request['data']['id'];
             $user = User::find($id);
@@ -114,17 +109,18 @@ class UserController extends Controller
 
     public function uploadimage(Request $req)
     {
-        $url = Storage::url('/public/1641931369_haider1.jpg');
-        dd($url);
         $user = Auth::user();
         $id = $user->id;
         $user = User::find($id);
         if ($req->file()) {
+            $file = $req->file('selectedFile');
             $fileName = time() . '_' . $req->file('selectedFile')->getClientOriginalName();
-            $filePath = $req->file('selectedFile')->storeAs('public', $fileName);
-            $user->profile_image = '/storage/' . $filePath;
+            $user->profile_image = $fileName;
+            $path = public_path('asset');
+            $file->move($path,$fileName);
             $user->save();
         }
+        
     }
 
 }
