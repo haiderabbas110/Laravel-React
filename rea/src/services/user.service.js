@@ -30,15 +30,13 @@ const setUserProfile = (data) => {
 };
 
 const setUserImage = (data) => {
-console.log(data);
   return axios
-    .post(API_URL + "user", 
-      data
-    , 
-    {
-      headers: authHeader()
-    })
-    .then((response) => {
+  .post(API_URL + "user", 
+  data, {
+    headers: authHeader()
+  })
+  .then((response) => {
+      console.log(response);
       return response.data;
     });
 

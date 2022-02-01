@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use  App\Models\User;
-use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
 
 class UserController extends Controller
 {
@@ -112,14 +113,46 @@ class UserController extends Controller
         $user = Auth::user();
         $id = $user->id;
         $user = User::find($id);
-        if ($req->file()) {
-            $file = $req->file('selectedFile');
-            $fileName = time() . '_' . $req->file('selectedFile')->getClientOriginalName();
-            $user->profile_image = $fileName;
-            $path = public_path('asset');
-            $file->move($path,$fileName);
-            $user->save();
-        }
+
+        
+        $file = $req->file();
+
+        // Build the input for validation
+        $fileArray = array('image' => $file);
+        $type       = 'jpeg,jpg,png,gif';
+        // Tell the validator that this file should be an image
+        $rules = array(
+        'image' => 'mimes:'.$type.'|required|max:500000' // max 10000kb
+        );
+
+        // Now pass the input and rules into the validator
+        $validator = Validator::make($fileArray, $rules);
+        // Check to see if validation fails or passes
+        if ($validator->fails())
+        {
+            // Redirect or return json to frontend with a helpful message to inform the user 
+            // that the provided file was not an adequate type
+            $error = "The image must be a type of".$type;
+            
+            // print_r($error['image']);
+            return response()->json(['message' => $error], 400);
+        } else
+        {
+            // Store the File Now
+            // read image from temporary file
+            if ($req->file()) {
+                $file = $req->file('selectedFile');
+                $fileName = time() . '_' . $req->file('selectedFile')->getClientOriginalName();
+                $user->profile_image = $fileName;
+                $path = public_path('asset');
+                $file->move($path,$fileName);
+                $user->save();
+                return response()->json(['user' => $user, 'message' => 'User image has been updated.'], 201);
+            }
+        };
+        
+       
+
         
     }
 

@@ -40,7 +40,24 @@ const Profile = () => {
     // setProfileImage(true);
   }
 
-  const handleSubmitImage = (event) => {
+  const handleSubmitImage = (event) => 
+  
+  {
+
+    event.preventDefault()
+    const formData = new FormData();
+    formData.append("selectedFile", selectedFile);
+    
+
+    const data = {
+      profile:formData,
+    }
+    
+    setLoading(true);
+    dispatch(UpdateUserImage(formData))
+      .then(() => {
+        setLoading(false);
+      })
   }
 
 
